@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  planned_delivery_date: 2019-04-16 06:04:46
+  ready_to_shipping_date: 2019-04-16 06:04:46
+  shipping_date: 2019-04-16 06:04:46
+  delivery_status: 1
+  gift_address: MyString
+  gift_postcode: MyString
+  gift_name: MyString
+  gift_phone_number: MyString
+
+two:
+  user_id: 1
+  planned_delivery_date: 2019-04-16 06:04:46
+  ready_to_shipping_date: 2019-04-16 06:04:46
+  shipping_date: 2019-04-16 06:04:46
+  delivery_status: 1
+  gift_address: MyString
+  gift_postcode: MyString
+  gift_name: MyString
+  gift_phone_number: MyString
