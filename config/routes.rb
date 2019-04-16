@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :labels, only: [:create, :update, :index, :destroy]
   resources :cds do
     resource :favorite, only: [:create, :destroy]
+    resources :comments, only: [:create, :update, :destroy]
   end
   resources :labels, only: [:create, :index, :show, :destroy]
   resources :categories, only: [:create, :index, :show]

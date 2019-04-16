@@ -24,15 +24,15 @@
 						<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
 						<% end %>
 						</div>
-						<% if cd.favorited_by?(current_user) %>
+						<% if @cd.favorited_by?(current_user) %>
 							<div>
-								<%= link_to cd_favorite_path(cd), method: :delete do %>
-								<i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+								<%= link_to cd_favorite_path(@cd), method: :delete do %>
+								<i class="far fa-heart" aria-hidden="true" style="color: red;"></i><%= @cd.favorites.count %>
 								<% end %>
 							</div>
 						<% else %>
 							<div>
-							<%= link_to cd_favorite_path(cd), method: :post do %>
+							<%= link_to cd_favorite_path(@cd), method: :post do %><%= @cd.favorites.count %>
 							<i class="far fa-heart" aria-hidden="true"></i>
 							<% end %>
 							</div>
@@ -43,6 +43,20 @@
 
 			<div>
 				<h3>Comments</h3>
+				<div>
+					<% if @cd.comments.present? %>
+						<table>
+						<% @cd.comments.each do |comment| %>
+							<tr>
+								<td><%= comment.user_id %><%= comment.comment_body %></td>
+							</tr>
+						<% end %>
+						</table>
+					<% end %>
+				</div>
+				<div>
+				<%= render 'comments/form', {cd: @cd, comment: @comment} %>
+				</div>
 				COMMENT AREA
 			</div>
 		</div>

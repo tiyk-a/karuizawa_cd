@@ -6,6 +6,7 @@ class Cd < ApplicationRecord
 	has_many :favorites, dependent: :destroy
 	accepts_nested_attributes_for :favorites
 	has_many :comments, dependent: :destroy
+	accepts_nested_attributes_for :comments
 	has_many :comment_replies, through: :comments, dependent: :destroy
 	attachment :cd_image
 
