@@ -1,2 +1,40 @@
-<h1>Cds#index</h1>
-<p>Find me in app/views/cds/index.html.erb</p>
+<div class="container">
+	<div clas="row">
+		<h2>Cds#index</h2>
+		<% @cds.each do |cd| %>
+			<div class="col-lg-4">
+				<%= link_to cd_path(cd.id) do %>
+				<%= attachment_image_tag(cd, :cd_image, :fill, 300, 300) %>
+				<% end %>
+				<p><%= link_to cd.cd_title, cd_path(cd.id) %></p>
+				<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></p>
+				<p>Price: <%= cd.price %></p>
+
+				<% if user_signed_in? %>
+					<div>
+						<div>
+						<%= link_to cds_path do %>
+						<!-- WILL BE cd_cart_item_path(cd.id), method: :post -->
+						<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+						<% end %>
+						</div>
+						<% if cd.favorited_by?(current_user) %>
+							<div>
+								<%= link_to cd_favorite_path(cd), method: :delete do %>
+								<i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+								<% end %>
+							</div>
+						<% else %>
+							<div>
+							<%= link_to cd_favorite_path(cd), method: :post do %>
+							<i class="far fa-heart" aria-hidden="true"></i>
+							<% end %>
+							</div>
+						<% end %>
+					</div>
+				 <% end  %>
+				<botton class="btn btn-default"><%= link_to "Delete", cd_path(cd.id), method: :delete %></botton>
+			</div>
+		<% end %>
+	</div>
+</div>

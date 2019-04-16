@@ -1,2 +1,21 @@
-<h1>Categories#index</h1>
-<p>Find me in app/views/categories/index.html.erb</p>
+<div class="container">
+	<div clas="row">
+		<h1>Categories#index</h1>
+			<% if @categories.present? %>
+			<% @categories.each do |category| %>
+				<div class="eachCategory">
+					<%= link_to category_path(category.id) do %>
+					<%= attachment_image_tag category.cds.last, :cd_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+					<% end %>
+					<p><%= link_to category.category_name, category_path(category.id) %></p>
+				</div>
+			<% end %>
+			<% end %>
+	</div>
+</div>
+
+<style>
+	.eachCategory {
+		height: 300px;
+		display: inline-block;
+	}
