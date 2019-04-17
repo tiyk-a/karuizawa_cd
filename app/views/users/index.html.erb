@@ -1,0 +1,42 @@
+<p id="notice">
+<%= notice %>
+</p>
+
+
+<div class=sample>
+  <h2>ユーザー一覧</h2>
+    <h3> </h3>
+</div>
+<table class="table">
+  <h3> 絞り込み </h3>
+<thead>
+  <tr>
+    <th>id</th>
+    <th>姓</th> 
+    <th>名</th> 
+    <th>フリガナ (氏)</th> 
+    <th>フリガナ (名)</th> 
+    <th>Email</th> 
+    <th>登録日時</th> 
+    <th>注文回数</th> 
+    <th>削除</th> 
+  </tr>
+</thead>  
+  
+<tbody>
+  <% @users.each do |user| %>
+  <tr>
+     <th><%= user.user_name %></th>
+     <th><%= user.last_name %></th>
+     <th><%= user.first_name %></th>
+     <th><%= user.last_name_kana %></th>
+     <th><%= user.first_name_kana %></th>
+     <th><%= user.email %></th>
+     <th><%= user.created_at %></th>
+     <th><%= user.address %></th>
+     <th><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+     </tr>
+     <% end %>
+</tbody>
+</table>
+<br>
