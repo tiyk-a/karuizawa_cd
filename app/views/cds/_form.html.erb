@@ -1,0 +1,50 @@
+<div class="col-lg-8">
+<%= form_for(cd) do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
+	<div>
+	 <%= f.label :cd_title %>
+    <%= f.text_field :cd_title, class: "form-control" %>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-4">
+    <%= f.label :cd_image %>
+    <%= f.attachment_field :cd_image, class: "form-control" %>
+  </div>
+  </div>
+  
+  <div>
+	 <%= f.label :artist_id %>
+   <%= f.collection_select(:artist_id, @artists, :id, :artist_name, class: "form-control") %>
+  </div>
+
+  <div>
+	 <%= f.label :label_id %>
+   <%= f.collection_select(:label_id, @labels, :id, :label_name, class: "form-control") %>
+  </div>
+
+  <div>
+    <%= f.label :category_id %>
+    <%= f.collection_select(:category_id, @categories, :id, :category_name, class: "form-control") %>
+  </div>
+
+  <div>
+    <%= f.label :stock %>
+    <%= f.number_field :stock %>
+  </div>
+
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :cd_profile %>
+  	<%= f.text_area :cd_profile, rows: "5", class: "form-control" %>
+  </div>
+
+  <div>
+  <%= f.submit  class: "btn btn-default" %>
+  </div>
+<% end %>
+</div>
