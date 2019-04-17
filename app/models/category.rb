@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-	has_many :cd
+	has_many :cds
 end

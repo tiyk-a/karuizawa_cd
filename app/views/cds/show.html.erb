@@ -1,2 +1,91 @@
-<h1>Cds#show</h1>
-<p>Find me in app/views/cds/show.html.erb</p>
+<div class="container">
+	<div clas="row">
+		<h1><h2><%= @cd.cd_title %></h2></h1>
+		<div class="col-lg-4">
+			<%= attachment_image_tag(@cd, :cd_image, :fill, 300, 300) %>
+		</div>
+		<div class="col-lg-8">
+			<p><%= @cd.cd_profile %></p>
+		</div>
+	</div>
+	<div clas="row">
+		<div class="col-lg-4">
+			<strong><%= @cd.cd_title %></strong>
+			<p><%= link_to @cd.artist.artist_name, artist_path(@cd.artist.id) %></p>
+			<p>Price: <%= @cd.price %></p>
+			<p>Quantity: <button>Add To Cart</button></p>
+			
+			<div>
+			<% if user_signed_in? %>
+					<div>
+						<div>
+						<%= link_to cds_path do %>
+						<!-- WILL BE cd_cart_item_path(cd.id), method: :post -->
+						<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+						<% end %>
+						</div>
+						<% if @cd.favorited_by?(current_user) %>
+							<div>
+								<%= link_to cd_favorite_path(@cd), method: :delete do %>
+								<i class="far fa-heart" aria-hidden="true" style="color: red;"></i><%= @cd.favorites.count %>
+								<% end %>
+							</div>
+						<% else %>
+							<div>
+							<%= link_to cd_favorite_path(@cd), method: :post do %><%= @cd.favorites.count %>
+							<i class="far fa-heart" aria-hidden="true"></i>
+							<% end %>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+
+			<div>
+				<h3>Comments</h3>
+				<div>
+					<% if @cd.comments.present? %>
+						<table>
+						<% @cd.comments.each do |comment| %>
+							<tr>
+								<td>
+									Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)
+									<button class="toReplyForm">Reply</button>
+									<div class="ReplyForm">
+										<input>
+									</div>
+									<% comeid = comment.id %>
+									<%= link_to "Delete", cd_comment_path(@cd.id,comeid.to_i), method: :delete %>
+								</td>
+							</tr>
+							<tr class="hidden">
+							</tr>
+						<% end %>
+						</table>
+					<% end %>
+				</div>
+				<div>
+				<%= render 'comments/form', {cd: @cd, comment: @comment} %>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			AREA FOR SONGS
+		</div>
+	</div>
+
+	<div clas="row">
+		<div class="col-lg-2">
+			<%= link_to "Back", cds_path, class: "btn btn-default" %>
+		</div>
+		<div class="col-lg-10">
+		</div>
+	</div>
+</div>
+
+
+<style>
+	.ReplyForm {
+		display: none;
+	}
+</style>

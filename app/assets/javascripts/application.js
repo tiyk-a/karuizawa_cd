@@ -16,3 +16,11 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+	$('.toReplyForm').each(function() {
+		$(this).click(function(){
+			$(this).next().toggle();
+		});
+	});
+});
