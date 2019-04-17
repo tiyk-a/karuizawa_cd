@@ -1,0 +1,62 @@
+class CdsController < ApplicationController
+  def index
+    @cds = Cd.all.reverse_order
+  end
+
+  def new
+    @cd = Cd.new
+    @artists = Artist.all.reverse_order
+    @labels = Label.all.reverse_order
+    @categories = Category.all.reverse_order
+  end
+
+  def create
+    @cd = Cd.new(cd_params)
+    if @cd.save
+      flash[:notice] = "Cd Saved!"
+      redirect_to cds_path
+    else
+      flash[:notice] = "Error!"
+      render :new
+    end
+  end
+
+  def edit
+    @cd = Cd.find(params[:id])
+    @artists = Artist.all.reverse_order
+    @labels = Label.all.reverse_order
+    @categories = Category.all.reverse_order
+  end
+
+  def update
+    @cd = Cd.find(params[:id])
+    if @cd.update(cd_params)
+      flash[:notice] = "Cd Updated!"
+      redirect_to cd_params(@cd.id)
+    else
+      flash[:notice] = "Error!"
+      render :edit
+    end
+  end
+
+  def show
+    @cd = Cd.find(params[:id])
+    @comment = @cd.comments.new
+    @comment_reply = CommentReply.new
+  end
+
+  def destroy
+    @cd = Cd.find(params[:id])
+    if @cd.destroy
+      redirect_to cds_path
+    else
+      flash[:notice] = "Error!"
+      render :edit
+    end
+  end
+
+  private
+  def cd_params
+    params.require(:cd).permit(:cd_title, :cd_image, :stock, :cd_profile, :price, :artist_id, :label_id, :category_id)
+  end
+end
