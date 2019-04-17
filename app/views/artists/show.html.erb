@@ -7,6 +7,7 @@
 		<div class="col-lg-8">
 			<h2><%= @artist.artist_name %></h2>
 			<p><%= @artist.artist_profile %></p>
+			<botton><%= link_to "Delete", artist_path(@artist.id), method: :delete %></botton>
 		</div>
 	</div>
 </div>
@@ -39,4 +40,3 @@
 		</div>
 	</div>
 </div>
-

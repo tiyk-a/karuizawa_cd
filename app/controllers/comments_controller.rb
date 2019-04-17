@@ -15,6 +15,10 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
+		@cd = Cd.find_by(params[:cd_id])
+		comment = Comment.find(params[:id])
+		comment.destroy
+		redirect_to cds_path
 	end
 
 	private

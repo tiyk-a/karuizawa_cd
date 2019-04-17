@@ -48,7 +48,17 @@
 						<table>
 						<% @cd.comments.each do |comment| %>
 							<tr>
-								<td><%= comment.user_id %><%= comment.comment_body %></td>
+								<td>
+									Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)
+									<button class="toReplyForm">Reply</button>
+									<div class="ReplyForm">
+										<input>
+									</div>
+									<% comeid = comment.id %>
+									<%= link_to "Delete", cd_comment_path(@cd.id,comeid.to_i), method: :delete %>
+								</td>
+							</tr>
+							<tr class="hidden">
 							</tr>
 						<% end %>
 						</table>
@@ -57,7 +67,6 @@
 				<div>
 				<%= render 'comments/form', {cd: @cd, comment: @comment} %>
 				</div>
-				COMMENT AREA
 			</div>
 		</div>
 		<div class="col-lg-8">
@@ -73,3 +82,10 @@
 		</div>
 	</div>
 </div>
+
+
+<style>
+	.ReplyForm {
+		display: none;
+	}
+</style>

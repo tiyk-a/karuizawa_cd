@@ -36,10 +36,10 @@ class ArtistsController < ApplicationController
   def destroy
     @artist = Artist.find(params[:id])
     if @artist.destroy
-      redirect_to root_path
+      redirect_to cds_path
     else
       flash[:notice] = "Error!"
-      render :edit
+      redirect_to artist_path(@artist)
     end
   end
 
