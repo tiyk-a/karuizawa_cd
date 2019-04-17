@@ -11,6 +11,13 @@ class CommentsController < ApplicationController
 	end
 
 	def update
+		@comment = Comment.find(params[:id])
+		if @comment.update(comment_params)
+			redirect_to cd_path(@comment.cd_id)
+		else
+			flash[:notice] = "Reply Update error!"
+			redirect_to cd_path(@comment.cd_id)
+		end
 	end
 
 	def destroy
