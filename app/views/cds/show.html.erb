@@ -49,12 +49,33 @@
 						<% @cd.comments.each do |comment| %>
 							<tr>
 								<td>
-									Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)
+									<strong>Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)</strong>
+										<% if comment.comment_replies.present? %>
+										<table>
+										<% comment.comment_replies.each do |rep| %>
+											<tr>
+												<td><%= rep.user_id %></td>
+												<td><%= rep.comment_reply_body %></td>
+											</tr>
+										<% end %>
+										</table>
+										<% end %>
+
+									<% comeid = comment.id %>
 									<button class="toReplyForm">Reply</button>
 									<div class="ReplyForm">
-										<input>
+										<%= form_for [comment, @comment_reply], url: comment_comment_replies_path(comment_id: comeid.to_i) do |f| %>
+											<div>
+												<%= f.label :comment_reply_body %>
+												<%= f.text_field :comment_reply_body, class: "form-control" %>
+												<%= f.hidden_field :comment_id, value: comment.id %>
+												<%= f.hidden_field :user_id, value: current_user.id %>
+											</div>
+										<%= f.submit %>
+										<% end %>
 									</div>
-									<% comeid = comment.id %>
+									 <!-- comeid = comment.id  -->
+
 									<%= link_to "Delete", cd_comment_path(@cd.id,comeid.to_i), method: :delete %>
 								</td>
 							</tr>

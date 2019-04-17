@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 		@cd = Cd.find_by(params[:cd_id])
 		comment = Comment.find(params[:id])
 		comment.destroy
-		redirect_to cds_path
+		redirect_to cd_path(@cd)
 	end
 
 	private
