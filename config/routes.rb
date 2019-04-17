@@ -3,17 +3,17 @@ Rails.application.routes.draw do
   #chiharu
   devise_for :users
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
-  resources :labels, only: [:create, :update, :index, :destroy]
+  resources :labels, only: [:create, :update, :index, :show, :destroy]
+  resources :categories, only: [:create, :index, :show]
   resources :cds do
     resources :comments, only: [:create], shallow: true do
       resources :comment_replies, only: [:create, :destroy]
     end
     resource :favorite, only: [:create, :destroy]
   end
-delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
-  resources :labels, only: [:create, :index, :show, :destroy]
-  resources :categories, only: [:create, :index, :show]
-  
+
+  delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
+
   #ryo
   root :to => "root#top"
   get '/about' => 'root#about',as: 'about'

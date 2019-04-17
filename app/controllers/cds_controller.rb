@@ -41,7 +41,7 @@ class CdsController < ApplicationController
 
   def show
     @cd = Cd.find(params[:id])
-    @comment = @cd.comments.new
+    @comment = Comment.new
     @comment_reply = CommentReply.new
   end
 

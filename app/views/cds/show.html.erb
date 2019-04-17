@@ -14,7 +14,7 @@
 			<p><%= link_to @cd.artist.artist_name, artist_path(@cd.artist.id) %></p>
 			<p>Price: <%= @cd.price %></p>
 			<p>Quantity: <button>Add To Cart</button></p>
-			
+
 			<div>
 			<% if user_signed_in? %>
 					<div>
@@ -56,6 +56,7 @@
 											<tr>
 												<td><%= rep.user_id %></td>
 												<td><%= rep.comment_reply_body %></td>
+												<td><%= link_to "Delte", comment_reply_path(rep.id), method: :delete, data: {confirm: 'Are you sure to delete?'} %></td>
 											</tr>
 										<% end %>
 										</table>
@@ -86,7 +87,14 @@
 					<% end %>
 				</div>
 				<div>
-				<%= render 'comments/form', {cd: @cd, comment: @comment} %>
+				<%= form_for [@cd, @comment] do |f| %>
+					<div>
+					<%= f.label :comment_body %>
+  					<%= f.text_field :comment_body, class: "form-control" %>
+  					<%= f.hidden_field :cd_id, value: @cd.id %>
+  					</div>
+  					<%= f.submit  class: "btn btn-default" %>
+				<% end %>
 				</div>
 			</div>
 		</div>

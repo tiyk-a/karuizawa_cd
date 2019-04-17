@@ -1,13 +1,12 @@
 class CommentsController < ApplicationController
 	def create
-		@cd = Cd.find_by(params[:cd_id])
-		@comment = @cd.comments.new(comment_params)
+		@comment = Comment.new(comment_params)
 		@comment.user_id = current_user.id
 		if @comment.save
-			redirect_to cd_path(@cd.id)
+			redirect_to cd_path(params[:cd_id])
 		else
 			flash[:notice] = "Error!"
-			redirect_to cd_path(@cd.id)
+			redirect_to cd_path(params[:cd_id])
 		end
 	end
 

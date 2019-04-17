@@ -14,6 +14,10 @@ class CommentRepliesController < ApplicationController
 	end
 
 	def destroy
+		comment_reply = CommentReply.find(params[:id])
+		comment_reply.destroy
+		cd = Cd.find(comment_reply.comment.cd_id)
+		redirect_to cd_path(cd)
 	end
 
 	private
