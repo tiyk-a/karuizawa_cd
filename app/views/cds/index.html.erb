@@ -33,7 +33,10 @@
 						<% end %>
 					</div>
 				 <% end  %>
-				<botton class="btn btn-default"><%= link_to "Delete", cd_path(cd.id), method: :delete %></botton>
+				 
+				 <% if user_signed_in? && current_user.admin?  %>
+					<botton class="btn btn-default"><%= link_to "Delete", cd_path(cd.id), method: :delete %></botton>
+				<% end %>
 			</div>
 		<% end %>
 	</div>
