@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   #chiharu
   devise_for :users
+  
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :show, :destroy]
   resources :categories, only: [:create, :index, :show]
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
   end
 
   delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
+
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy', as: :logout
+  end
 
   #ryo
   root :to => "root#top"

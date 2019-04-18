@@ -19,19 +19,21 @@
         <span style="color:white;font-size:x-large;">logo</span>
       </nav>
       <nav>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="color: white;">
           <li>About</li>
           <li>検索</li>
           <li>カート(X)</li>
-          <li>ユーザー名</li>
-          <li>ログアウト</li>
+          <% if user_signed_in? %>
+          <li><%= current_user.id %><%= current_user.email %></li>
+          <li><%= link_to "ログアウト", logout_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>
     </div>
   </div>
 </header>
-  </header>
+
 <main>
   <%= yield %>
 </main>

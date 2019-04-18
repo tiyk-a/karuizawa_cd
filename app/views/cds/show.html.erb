@@ -15,17 +15,26 @@
 			<strong><%= @cd.cd_title %></strong>
 			<p><%= link_to @cd.artist.artist_name, artist_path(@cd.artist.id) %></p>
 			<p>Price: <%= @cd.price %></p>
-			<p>Quantity: <button>Add To Cart</button></p>
+			<% if user_signed_in? && current_user.admin?  %>
+				<p>Stocks: <%= @cd.stock %></p>
+			<% end %>
 
 			<div>
-			<% if user_signed_in? %>
+				<% if user_signed_in? %>
 					<div class="inline-block">
-						<div>
-						<%= link_to cds_path do %>
-						<!-- WILL BE cd_cart_item_path(cd.id), method: :post -->
-						<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
-						<% end %>
-						</div>
+							<%= form_for(@cart_item) do |f| %>
+								<div class="inline-block">
+									<p>Quantity: <%= f.number_field :quantity, class: "form-control" %></p>
+								</div>
+								<div class="inline-block">
+									<%= button_tag type: 'submit', class: "btn" do %>
+										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+									<% end %>
+								</div>
+							<% end %>
+					</div>
+
+					<div class="inline-block">
 						<% if @cd.favorited_by?(current_user) %>
 							<div>
 								<%= link_to cd_favorite_path(@cd), method: :delete do %>
@@ -40,11 +49,55 @@
 							</div>
 						<% end %>
 					</div>
+			<% else %>
+					<div class="inline-block">
+							<%= form_for(@cart_item) do |f| %>
+								<div class="inline-block">
+									<p>Quantity: <%= f.number_field :quantity, class: "form-control" %></p>
+								</div>
+								<%= f.hidden_field :user_id, value: "0" %>
+								<div class="inline-block">
+									<%= button_tag type: 'submit', class: "btn" do %>
+										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+									<% end %>
+								</div>
+							<% end %>
+					</div>
+
+					<div class="inline-block">
+						<button type="button" data-toggle="modal" data-target="#exampleModal">
+  							<i class="far fa-heart" aria-hidden="true"></i>
+						</button>
+						<%= @cd.favorites.count %>
+
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  							<div class="modal-dialog" role="document">
+    							<div class="modal-content">
+      								<div class="modal-header">
+       									 <h5 class="modal-title" id="exampleModalLabel">Log In to Throw Favorite?</h5>
+        								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         									<span aria-hidden="true">&times;</span>
+      									</button>
+      								</div>
+      								<div class="modal-body">
+      									<%= link_to "Log In", new_user_session_path, class: "btn btn-default btn-sm" %>
+      									<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm" %>
+      								</div>
+      								<div class="modal-footer">
+       									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      								</div>
+    							</div>
+  							</div>
+						</div>
+					</div>
+			<% end %>
+
+				<% if user_signed_in? && current_user.admin?  %>
+					<div class="inline-block">
+						<%= link_to "Edit", edit_cd_path(@cd.id), class: "btn btn-default" %>
+						<%= link_to "Delete", cd_path(@cd.id), method: :delete, class: "btn btn-default" %>
+					</div>
 				<% end %>
-				<div class="inline-block">
-					<%= link_to "Edit", edit_cd_path(@cd.id), class: "btn btn-default" %>
-					<%= link_to "Delete", cd_path(@cd.id), method: :delete, class: "btn btn-default" %>
-				</div>
 			</div>
 
 			<div>
@@ -57,6 +110,7 @@
 								<td>
 									<strong>Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)</strong>
 									<% comeid = comment.id %>
+									<% if comment.user == current_user %>
 									<button class="toEditForm">Edit</button>
 										<div class="EditForm">
 											<%= form_for(comment) do |f| %>
@@ -68,7 +122,12 @@
   													<%= f.submit  class: "btn btn-default" %>
 											<% end %>
 										</div>
-									<%= link_to "Delete Comment?", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: 'Are you sure to delete?'} %>
+									<% end %>
+										<% if user_signed_in? %>
+										<% if current_user.admin? || comment.user == current_user %>
+											<%= link_to "Delete Comment?", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: 'Are you sure to delete?'} %>
+										<% end %>
+										<% end %>
 										<% if comment.comment_replies.present? %>
 										<table>
 										<% comment.comment_replies.each do |rep| %>
@@ -77,6 +136,7 @@
 												<td>User Id <%= rep.user_id %></td>
 												<td><strong><%= rep.comment_reply_body %></strong></td>
 												<td>Id: <%= rep.id %></td>
+												<% if rep.user == current_user %>
 												<td><button class="toEditForm">Edit</button>
 													<div class="EditForm">
 														<% @rep = rep %>
@@ -91,13 +151,19 @@
 															<% end %>
 													</div>
 												</td>
+												<% end %>
+												<% if user_signed_in? %>
+												<% if current_user.admin? || comment.user == current_user %>  %>
 												<td><%= link_to "Delete Reply?", comment_reply_path(rep.id), method: :delete, data: {confirm: 'Are you sure to delete?'} %></td>
+												<% end %>
 											</tr>
+										<% end %>
 										<% end %>
 										</table>
 										<% end %>
 
 									<% comeid = comment.id %>
+									<% if user_signed_in? %>
 									<button class="toReplyForm">Reply</button>
 									<div class="ReplyForm">
 										<%= form_for [comment, @comment_reply], url: comment_comment_replies_path(comment_id: comeid.to_i) do |f| %>
@@ -110,14 +176,18 @@
 										<%= f.submit %>
 										<% end %>
 									</div>
+									<% else %>
+										<strong><%= link_to "Log In to Reply!", new_user_session_path %></strong>
+									<% end %>
 								</td>
-							</tr>
-							<tr class="hidden">
 							</tr>
 						<% end %>
 						</table>
 					<% end %>
 				</div>
+
+<!-- New Comment -->
+				<% if user_signed_in? %>
 				<div>
 				<%= form_for [@cd, @comment] do |f| %>
 					<div>
@@ -128,7 +198,15 @@
   					<%= f.submit  class: "btn btn-default" %>
 				<% end %>
 				</div>
+				<% else %>
+					<strong><%= link_to "Log In to Comment!", new_user_session_path %></strong>
+				<% end %>
+<!-- [END] New Comment -->
 			</div>
+		</div>
+	</div>
+</div>
+
 		</div>
 		<div class="col-lg-6">
 			AREA FOR SONGS
@@ -145,7 +223,6 @@
 		</div>
 	</div>
 </div>
-
 
 <style>
 	.ReplyForm, .EditForm {
