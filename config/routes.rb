@@ -5,6 +5,15 @@ Rails.application.routes.draw do
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :destroy]
   resources :cds do
+
+    #ryo
+    resources :cart_items,only: [:show,:create,:update,:destroy]
+
+    resources :disc_numbers,only:[:new,:edit,:create,:update,:destroy] do
+      resources :songs,only:[:new,:edit,:create,:update,:destroy]
+    end
+    #/ryo
+
     resources :comments, only: [:create], shallow: true do
       resources :comment_replies, only: [:create, :destroy]
     end
@@ -17,8 +26,6 @@ delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
   #ryo
   root :to => "root#top"
   get '/about' => 'root#about',as: 'about'
-  resources :songs,only: [:show,:new,:create,:edit,:update]
-  resources :cart_items,only: [:show,:create,:update,:destroy]
   resources :orders,only:[:index,:show,:create,:edit,:update]
   get '/checkout' => 'orders#checkout',as: 'checkout'
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'

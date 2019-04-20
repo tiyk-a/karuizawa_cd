@@ -10,6 +10,13 @@ class Cd < ApplicationRecord
 	has_many :comment_replies, through: :comments, dependent: :destroy
 	attachment :cd_image
 
+	#ryo
+	has_many :disc_numbers, dependent: :destroy
+	has_many :cart_items, dependent: :destroy
+
+
+
+
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
