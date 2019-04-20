@@ -2,9 +2,12 @@ Rails.application.routes.draw do
 
   #chiharu
   devise_for :users
+  
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
-  resources :labels, only: [:create, :update, :index, :destroy]
+  resources :labels, only: [:create, :update, :index, :show, :destroy]
+  resources :categories, only: [:create, :index, :show]
   resources :cds do
+<<<<<<< HEAD
 
     #ryo
     resources :cart_items,only: [:show,:create,:update,:destroy]
@@ -16,13 +19,20 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:create], shallow: true do
       resources :comment_replies, only: [:create, :destroy]
+=======
+    resources :comments, only: [:create, :update], shallow: true do
+      resources :comment_replies, only: [:create, :update, :destroy]
+>>>>>>> 9a93ce0e1c19767d1838a22ce6141c802cd2de1b
     end
     resource :favorite, only: [:create, :destroy]
   end
-delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
-  resources :labels, only: [:create, :index, :show, :destroy]
-  resources :categories, only: [:create, :index, :show]
-  
+
+  delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
+
+  devise_scope :user do
+    get '/logout', to: 'devise/sessions#destroy', as: :logout
+  end
+
   #ryo
   root :to => "root#top"
   get '/about' => 'root#about',as: 'about'

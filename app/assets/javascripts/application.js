@@ -17,10 +17,30 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+
+if(typeof jQuery != "undefined"){ //jQueryの読み込み確認
+    $(function(){
+        alert('jQuery is ready.')
+    });
+}
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
+// for Cds/show
 $(function() {
-	$('.toReplyForm').each(function() {
-		$(this).click(function(){
-			$(this).next().toggle();
-		});
-	});
+  $('.toReplyForm').each(function() {
+    $(this).click(function() {
+      $(this).next().toggle();
+    });
+  });
+});
+
+$(function() {
+  $('.toEditForm').each(function() {
+    $(this).click(function() {
+         $(this).next().toggle();
+     });
+  });
 });
