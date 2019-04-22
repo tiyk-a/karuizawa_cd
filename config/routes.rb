@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   #chiharu
   devise_for :users
   
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy', as: :logout
   end
   resources :pickups, only: [:new, :create, :edit, :update, :show, :destroy]
+  get '/search', to: 'searches#result', as: :search
+
 
   #ryo
   root :to => "root#top"
