@@ -1,3 +1,4 @@
+<div class="body">
 <div class="container">
 	<div clas="row">
 		<h1><h2><%= @cd.cd_title %></h2></h1>
@@ -14,9 +15,9 @@
 		<div class="col-lg-6">
 			<strong><%= @cd.cd_title %></strong>
 			<p><%= link_to @cd.artist.artist_name, artist_path(@cd.artist.id) %></p>
-			<p>Price: <%= @cd.price %></p>
+			<p>価格: <%= @cd.price %></p>
 			<% if user_signed_in? && current_user.admin?  %>
-				<p>Stocks: <%= @cd.stock %></p>
+				<p>在庫数: <%= @cd.stock %></p>
 			<% end %>
 
 			<div>
@@ -24,7 +25,7 @@
 					<div class="inline-block">
 							<%= form_for(@cart_item) do |f| %>
 								<div class="inline-block">
-									<p>Quantity: <%= f.number_field :quantity, class: "form-control" %></p>
+									<p>数量: <%= f.number_field :quantity, class: "form-control" %></p>
 								</div>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', class: "btn" do %>
@@ -53,7 +54,7 @@
 					<div class="inline-block">
 							<%= form_for(@cart_item) do |f| %>
 								<div class="inline-block">
-									<p>Quantity: <%= f.number_field :quantity, class: "form-control" %></p>
+									<p>数量: <%= f.number_field :quantity, class: "form-control" %></p>
 								</div>
 								<%= f.hidden_field :user_id, value: "0" %>
 								<div class="inline-block">
@@ -74,7 +75,7 @@
   							<div class="modal-dialog" role="document">
     							<div class="modal-content">
       								<div class="modal-header">
-       									 <h5 class="modal-title" id="exampleModalLabel">Log In to Throw Favorite?</h5>
+       									 <h5 class="modal-title" id="exampleModalLabel">いいねを押すにはログインしてください。</h5>
         								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
          									<span aria-hidden="true">&times;</span>
       									</button>
@@ -84,7 +85,7 @@
       									<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm" %>
       								</div>
       								<div class="modal-footer">
-       									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       									<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
       								</div>
     							</div>
   							</div>
@@ -94,24 +95,24 @@
 
 				<% if user_signed_in? && current_user.admin?  %>
 					<div class="inline-block">
-						<%= link_to "Edit", edit_cd_path(@cd.id), class: "btn btn-default" %>
-						<%= link_to "Delete", cd_path(@cd.id), method: :delete, class: "btn btn-default" %>
+						<%= link_to "編集", edit_cd_path(@cd.id), class: "btn btn-default" %>
+						<%= link_to "削除", cd_path(@cd.id), method: :delete, class: "btn btn-default" %>
 					</div>
 				<% end %>
 			</div>
 
 			<div>
-				<h3>Comments</h3>
+				<h3>コメント一覧</h3>
 				<div>
 					<% if @cd.comments.present? %>
 						<table>
 						<% @cd.comments.each do |comment| %>
 							<tr>
 								<td>
-									<strong>Mr.<%= comment.user_id %> Says 『<%= comment.comment_body %>』 to <%= comment.cd_id %>(Comment Id: <%= comment.id %>)</strong>
+									<strong><%= comment.user_id %>さんのコメント『<%= comment.comment_body %>』（CDのid: <%= comment.cd_id %>、コメントのId: <%= comment.id %>)</strong>
 									<% comeid = comment.id %>
 									<% if comment.user == current_user %>
-									<button class="toEditForm">Edit</button>
+									<button class="toEditForm">編集</button>
 										<div class="EditForm">
 											<%= form_for(comment) do |f| %>
 												<div>
@@ -125,24 +126,24 @@
 									<% end %>
 										<% if user_signed_in? %>
 										<% if current_user.admin? || comment.user == current_user %>
-											<%= link_to "Delete Comment?", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: 'Are you sure to delete?'} %>
+											<%= link_to "コメントを削除しますか?", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: '本当に削除しますか'} %>
 										<% end %>
 										<% end %>
 										<% if comment.comment_replies.present? %>
 										<table>
 										<% comment.comment_replies.each do |rep| %>
 											<tr>
-												<td>Comment Id <%= rep.comment.id %></td>
-												<td>User Id <%= rep.user_id %></td>
+												<td>コメントID: <%= rep.comment.id %></td>
+												<td>ユーザーId: <%= rep.user_id %></td>
 												<td><strong><%= rep.comment_reply_body %></strong></td>
 												<td>Id: <%= rep.id %></td>
 												<% if rep.user == current_user %>
-												<td><button class="toEditForm">Edit</button>
+												<td><button class="toEditForm">編集</button>
 													<div class="EditForm">
 														<% @rep = rep %>
 															<%= form_for(@rep) do |f| %>
 															<div>
-																<%= f.label :comment_reply_body %>
+																<%= f.label :comment_reply_body, "返信内容" %>
 																<%= f.text_field :comment_reply_body, class: "form-control" %>
 																<%= f.hidden_field :comment_id, value: comment.id %>
 																<%= f.hidden_field :user_id, value: current_user.id %>
@@ -154,7 +155,7 @@
 												<% end %>
 												<% if user_signed_in? %>
 												<% if current_user.admin? || comment.user == current_user %>  %>
-												<td><%= link_to "Delete Reply?", comment_reply_path(rep.id), method: :delete, data: {confirm: 'Are you sure to delete?'} %></td>
+												<td><%= link_to "返信を削除しますか?", comment_reply_path(rep.id), method: :delete, data: {confirm: '本当に削除しますか?'} %></td>
 												<% end %>
 											</tr>
 										<% end %>
@@ -164,11 +165,11 @@
 
 									<% comeid = comment.id %>
 									<% if user_signed_in? %>
-									<button class="toReplyForm">Reply</button>
+									<button class="toReplyForm">返信</button>
 									<div class="ReplyForm">
 										<%= form_for [comment, @comment_reply], url: comment_comment_replies_path(comment_id: comeid.to_i) do |f| %>
 											<div>
-												<%= f.label :comment_reply_body %>
+												<%= f.label :comment_reply_body, "返信内容" %>
 												<%= f.text_field :comment_reply_body, class: "form-control" %>
 												<%= f.hidden_field :comment_id, value: comment.id %>
 												<%= f.hidden_field :user_id, value: current_user.id %>
@@ -177,7 +178,7 @@
 										<% end %>
 									</div>
 									<% else %>
-										<strong><%= link_to "Log In to Reply!", new_user_session_path %></strong>
+										<strong><%= link_to "返信するためにはログインしてください!", new_user_session_path %></strong>
 									<% end %>
 								</td>
 							</tr>
@@ -191,15 +192,15 @@
 				<div>
 				<%= form_for [@cd, @comment] do |f| %>
 					<div>
-					<%= f.label :comment_body %>
+					<%= f.label :comment_body, "コメント内容" %>
   					<%= f.text_field :comment_body, class: "form-control" %>
   					<%= f.hidden_field :cd_id, value: @cd.id %>
   					</div>
-  					<%= f.submit  class: "btn btn-default" %>
+  					<%= f.submit "コメント送信", class: "btn btn-default" %>
 				<% end %>
 				</div>
 				<% else %>
-					<strong><%= link_to "Log In to Comment!", new_user_session_path %></strong>
+					<strong><%= link_to "コメントをするにはログインしてください!", new_user_session_path %></strong>
 				<% end %>
 <!-- [END] New Comment -->
 			</div>
@@ -217,12 +218,13 @@
 <div class="container">
 	<div clas="row">
 		<div class="col-lg-2">
-			<%= link_to "Back", cds_path, class: "btn btn-default" %>
+			<%= link_to "CD一覧に戻る", cds_path, class: "btn btn-default" %>
 		</div>
 		<div class="col-lg-10">
 		</div>
 	</div>
 </div>
+
 
 <style>
 	.ReplyForm, .EditForm {

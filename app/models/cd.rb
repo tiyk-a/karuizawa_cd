@@ -9,6 +9,7 @@ class Cd < ApplicationRecord
 	accepts_nested_attributes_for :comments
 	has_many :comment_replies, through: :comments, dependent: :destroy
 	attachment :cd_image
+	has_one :pickup, inverse_of: :cd
 
 	#ryo
 	has_many :disc_numbers, dependent: :destroy

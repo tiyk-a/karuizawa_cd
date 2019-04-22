@@ -32,7 +32,7 @@ class CdsController < ApplicationController
     @cd = Cd.find(params[:id])
     if @cd.update(cd_params)
       flash[:notice] = "Cd Updated!"
-      redirect_to cd_params(@cd.id)
+      redirect_to cd_path(@cd)
     else
       flash[:notice] = "Error!"
       render :edit
