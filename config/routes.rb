@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :cds do
 
     #ryo
-    resources :disc_numbers,only:[:create,:update,:destroy] do
-      resources :songs,only:[:create,:update,:destroy]
+    resources :disc_numbers,only:[:new, :edit, :create, :update, :destroy] do
+      resources :songs,only:[:new, :edit, :create, :update, :destroy]
     end
     #/ryo
 
