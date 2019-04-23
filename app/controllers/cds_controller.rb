@@ -8,6 +8,8 @@ class CdsController < ApplicationController
     @artists = Artist.all.reverse_order
     @labels = Label.all.reverse_order
     @categories = Category.all.reverse_order
+    @disc_number = @cd.disc_numbers.build #ryo
+
   end
 
   def create

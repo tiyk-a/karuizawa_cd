@@ -25,7 +25,7 @@
       </nav>
       <nav>
         <ul class="nav navbar-nav navbar-right" style="color: white;">
-          <li>About</li>
+          <li><%= link_to "About",'/about' %> </li>
           <li><%= render 'layouts/search', {search: @search} %></li>
           <li>カート(X)</li>
           <% if user_signed_in? %>
