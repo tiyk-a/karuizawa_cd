@@ -16,6 +16,9 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+//= require cocoon
+
+
 
 
 if(typeof jQuery != "undefined"){ //jQueryの読み込み確認
