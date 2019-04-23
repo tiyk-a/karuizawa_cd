@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     
    def  check_admin
     #   ログイン済みかどうかの判断
+    
      if current_user.id != 1
          redirect_to root_path
      end

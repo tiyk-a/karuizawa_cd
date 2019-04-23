@@ -39,11 +39,11 @@ delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
   # get 'artists/show'
   
   #kazumi
-  resources :users, only: [:show, :index, :create,:edit]
   devise_for :users, :controllers => {
   :registrations => 'users/registrations',
   :sessions => 'users/sessions'   
 } 
+  resources :users, only: [:show, :index, :create,:edit]
   devise_scope :user do
     get "user/:id", :to => "users#show"
     get "signup", :to => "users/registrations#new"

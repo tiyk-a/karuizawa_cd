@@ -4,17 +4,17 @@
   <p>※登録情報は配送時に使用します。</p>
   <P>※登録後にマイページからも編集できます。</P>
   <div class=content_1>
-    <%= form_for(@user) do |f| %>
-     <%= render "devise/shared/error_messages", resource: @user %>
-
-     <div class="form-group row">
+     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+     <%= render "devise/shared/error_messages", resource: resource %>
+    
+      <div class="form-group row">
+        <%= f.label :email, "Email:"  %> 
+        <%= f.email_field :email,class: "email"%>
+      </div>
+       <div class="form-group row">
        <%= f.label :user_name , "ユーザー名:" %>
        <%= f.text_field :user_name %>
        <p>※ユーザ名は半角英数字のみです</p>
-      </div>
-      <div class="field">
-        <%= f.label :email, "Email:"  %> 
-        <%= f.email_field :email,class: "email"%>
       </div>
       <div class="field">
         <%= f.label :password, "パスワード:" %>
@@ -44,8 +44,9 @@
   </div>
 
     <%= f.submit "登録", class:"btn btn-default" %>
-  <% end %>
+    <% end %>
    </div>
+
 
 
 <%= render "devise/shared/links" %>
