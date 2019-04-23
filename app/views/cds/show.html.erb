@@ -23,7 +23,7 @@
 			<div>
 				<% if user_signed_in? %>
 					<div class="inline-block">
-							<%= form_for(@cart_item) do |f| %>
+							<%= form_for(@cart_item, url:cart_item_path) do |f| %>
 								<div class="inline-block">
 									<p>数量: <%= f.number_field :quantity, class: "form-control" %></p>
 								</div>
