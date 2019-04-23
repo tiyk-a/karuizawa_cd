@@ -5,20 +5,21 @@
 				<div class="panel panel-default">
 					<div class="panel-heading"><%= link_to "ジャンルで探す",'/categories' %></div>
 					<div class="panel-body">
-					<% @categories.each do |category| %>
-					<tr>
-					 <li><%= link_to category.category_name, category_path(category.id) %></li>
-					</tr>
-					<% end %>
+						<% @categories.each do |category| %>
+						<tr>
+							<li><%= link_to category.category_name, category_path(category.id) %></li>
+						</tr>
+						<% end %>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">ピックアップ</div>
 					<div class="panel-body">
-						<p>Admin Review Title</p>
-						<p>Admin Review Title</p>
-						<p>Admin Review Title</p>
-						<p>Admin Review Title</p>
+						<% @pickups.each do |pickup| %>
+						<tr>
+							<li><%= link_to pickup.pickup_title, pickup_path(pickup.id) %></li>
+						</tr>
+						<% end %>
 					</div>
 				</div>
 			</div>
