@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'inquiries/index'
+  get 'inquiries/new'
+  get 'inquiries/show'
+  get 'inquiries/edit'
   #chiharu
-  devise_for :users
+ 
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :destroy]
   resources :cds do
@@ -33,4 +37,18 @@ delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
   # get 'artists/new'
   # get 'artists/edit'
   # get 'artists/show'
+  
+  #kazumi
+  resources :users, only: [:show, :index, :create,:edit]
+  devise_for :users, :controllers => {
+  :registrations => 'users/registrations',
+  :sessions => 'users/sessions'   
+} 
+  devise_scope :user do
+    get "user/:id", :to => "users#show"
+    get "signup", :to => "users/registrations#new"
+    get "users/edit", :to => "users/registrations#edit"
+    get "login", :to => "users/sessions#new"
+    get "logout", :to => "users/sessions#destroy"
+  end
 end
