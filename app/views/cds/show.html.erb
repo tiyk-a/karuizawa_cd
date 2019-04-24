@@ -66,31 +66,13 @@
 					</div>
 
 					<div class="inline-block">
-						<button type="button" data-toggle="modal" data-target="#exampleModal">
+						<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">
   							<i class="far fa-heart" aria-hidden="true"></i>
 						</button>
 						<%= @cd.favorites.count %>
-
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  							<div class="modal-dialog" role="document">
-    							<div class="modal-content">
-      								<div class="modal-header">
-       									 <h5 class="modal-title" id="exampleModalLabel">いいねを押すにはログインしてください。</h5>
-        								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-         									<span aria-hidden="true">&times;</span>
-      									</button>
-      								</div>
-      								<div class="modal-body">
-      									<%= link_to "Log In", new_user_session_path, class: "btn btn-default btn-sm" %>
-      									<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default btn-sm" %>
-      								</div>
-      								<div class="modal-footer">
-       									<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-      								</div>
-    							</div>
-  							</div>
-						</div>
+						<%= render 'modal' %>
 					</div>
+
 			<% end %>
 
 				<% if user_signed_in? && current_user.admin?  %>
@@ -176,9 +158,12 @@
 											</div>
 										<%= f.submit %>
 										<% end %>
-									</div>
 									<% else %>
-										<strong><%= link_to "返信するためにはログインしてください!", new_user_session_path %></strong>
+										<div class="inline-block">
+											<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">返信</button>
+												<%= render 'modal' %>
+										</div>
+										</div>
 									<% end %>
 								</td>
 							</tr>
@@ -200,7 +185,10 @@
 				<% end %>
 				</div>
 				<% else %>
-					<strong><%= link_to "コメントをするにはログインしてください!", new_user_session_path %></strong>
+				<div class="inline-block">
+					<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">コメントを送る</button>
+						<%= render 'modal' %>
+				</div>
 				<% end %>
 <!-- [END] New Comment -->
 			</div>
