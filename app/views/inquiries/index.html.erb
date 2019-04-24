@@ -9,6 +9,7 @@
     <th>ユーザー名</th> 
     <th>お問い合わせカテゴリー</th> 
     <th>内容</th> 
+    <th>詳細</th>
     <th>削除</th> 
   </tr>
 </thead>  
@@ -17,14 +18,14 @@
   <% @inquiries.each do |inquiry| %>
   <tr>
      <th><%= inquiry.created_at %></th>
-     <th><%= inquiry. %></th>
-     <th><%= user.first_name %></th>
-     <th><%= user.last_name_kana %></th>
-     <th><%= user.first_name_kana %></th>
-     <th><%= user.email %></th>
-     <th><%= user.created_at %></th>
      
-     <th><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+     <th><%= inquiry.user.created_at %></th>
+     <th><%= inquiry.user.user_name %></th>
+     <th><%= inquiry.inquiry_category %></th>
+     <th><%= inquiry.inquiry_body %></th>
+   
+     <th><%= link_to 'show', inquiry_path(inquiry.id) %></th>
+     <th><%= link_to 'Destroy', inquiry_path(inquiry.id), method: :delete, data: { confirm: 'Are you sure?' } %></th>
      </tr>
      <% end %>
 </tbody>

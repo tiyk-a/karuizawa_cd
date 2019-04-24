@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'inquiries/index'
-  get 'inquiries/new'
-  get 'inquiries/show'
-  get 'inquiries/edit'
+ 
   #chiharu
+  resources :inquiries
  
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :destroy]

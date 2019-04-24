@@ -9,7 +9,8 @@ class UsersController < ApplicationController
  
 
   def show
-   @user= find(params[:id])
+   @user= current_user
+   @favorites = Favorite.all
   end
   
    def new
