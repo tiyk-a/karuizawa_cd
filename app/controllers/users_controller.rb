@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :check_admin, only: [:index]
  
   def index
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
  
 
   def show
-   
+   @user= find(params[:id])
   end
   
    def new

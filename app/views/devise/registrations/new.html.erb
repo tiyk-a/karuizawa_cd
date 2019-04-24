@@ -22,6 +22,14 @@
         <% end %>
         <%= f.password_field :password, class:"password" %>
       </div>  
+       <div class="form-group row">
+        <%= f.label :last_name, "姓" %>
+        <%= f.text_field :last_name %>
+      </div>
+       <div class="form-group row">
+        <%= f.label :first_name, "氏" %>
+        <%= f.text_field :first_name %>
+      </div>
       <div class="form-group row">
         <%= f.label :last_name_kana, "姓(カナ)" %>
         <%= f.text_field :last_name_kana %>

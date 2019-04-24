@@ -13,6 +13,21 @@
   </tr>
 </thead>  
   
-
+<tbody>
+  <% @inquiries.each do |inquiry| %>
+  <tr>
+     <th><%= inquiry.created_at %></th>
+     <th><%= inquiry. %></th>
+     <th><%= user.first_name %></th>
+     <th><%= user.last_name_kana %></th>
+     <th><%= user.first_name_kana %></th>
+     <th><%= user.email %></th>
+     <th><%= user.created_at %></th>
+     
+     <th><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+     </tr>
+     <% end %>
+</tbody>
+</table>
 </table>
 

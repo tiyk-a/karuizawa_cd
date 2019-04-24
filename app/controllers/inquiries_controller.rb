@@ -1,5 +1,7 @@
 class InquiriesController < ApplicationController
   def index
+    @inquiries = inquiry.all
+    @users = user.all
   end
 
   def new
@@ -10,11 +12,19 @@ class InquiriesController < ApplicationController
     @inquiry = Inquiry.new(inquiry_params)
     if @inquiry.save
       flash[:notice] = "登録しました"
-      redirect_to artist_path(@inquiry.id)
+      redirect_to root_path
     else
       flash[:notice] = "Error!"
       render :new
     end
+    	@cd = Cd.find_by(params[:cd_id])
+		@comment = @cd.comments.new(comment_params)
+		@comment.user_id = current_user.id
+		if @comment.save
+			redirect_to cd_path(@cd.id)
+		else
+			flash[:notice] = "Error!"
+			redirect_to cd_path(@cd.id)
   end
 
   def show

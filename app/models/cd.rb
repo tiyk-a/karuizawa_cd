@@ -9,6 +9,16 @@ class Cd < ApplicationRecord
 	accepts_nested_attributes_for :comments
 	has_many :comment_replies, through: :comments, dependent: :destroy
 	attachment :cd_image
+	has_one :pickup, inverse_of: :cd
+
+	#ryo
+	has_many :disc_numbers, dependent: :destroy, inverse_of: :cd
+	accepts_nested_attributes_for :disc_numbers, reject_if: :all_blank, allow_destroy: true
+
+	has_many :cart_items, dependent: :destroy
+
+
+
 
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
