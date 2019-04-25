@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   get '/about' => 'root#about',as: 'about'
   get '/checkout' => 'orders#checkout',as: 'checkout'
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
+  resources :cart_items, only:[:create, :update, :destroy]
+  get '/cart' => 'carts#cart',as: 'cart'
+  post '/add_item' => 'carts#add_item', as: 'add_item'
+  post '/update_item' => 'carts#update_item',as: 'update_item'
+  delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
+
 
   # get 'categories/index'
   # get 'categories/show'
