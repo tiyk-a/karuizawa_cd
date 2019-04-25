@@ -2,11 +2,17 @@ Rails.application.routes.draw do
 
   #chiharu
   devise_for :users
-  
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :show, :destroy]
   resources :categories, only: [:create, :index, :show]
   resources :cds do
+
+    #ryo
+    resources :disc_numbers,only:[:new, :edit, :create, :update, :destroy] do
+      resources :songs,only:[:new, :edit, :create, :update, :destroy]
+    end
+    #/ryo
+
     resources :comments, only: [:create, :update], shallow: true do
       resources :comment_replies, only: [:create, :update, :destroy]
     end
@@ -25,9 +31,6 @@ Rails.application.routes.draw do
   #ryo
   root :to => "root#top"
   get '/about' => 'root#about',as: 'about'
-  resources :songs,only: [:show,:new,:create,:edit,:update]
-  resources :cart_items,only: [:show,:create,:update,:destroy]
-  resources :orders,only:[:index,:show,:create,:edit,:update]
   get '/checkout' => 'orders#checkout',as: 'checkout'
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
 
