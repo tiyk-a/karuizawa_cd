@@ -14,8 +14,7 @@
 				<% if user_signed_in? %>
 					<div>
 						<div class="inline-block">
-						<%= link_to cds_path do %>
-						<!-- WILL BE cd_cart_item_path(cd.id), method: :post -->
+						<%= link_to add_item_path(cd.id), method: :post do %>
 						<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
 						<% end %>
 						</div>
