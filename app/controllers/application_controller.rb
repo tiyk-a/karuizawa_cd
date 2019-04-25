@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
      # アドミンとユーザーで見れるページを分ける
    def  check_admin
-     if current_user.id != 1
+     if current_user.id != 7
          redirect_to root_path
      end
    end

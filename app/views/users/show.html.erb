@@ -1,15 +1,17 @@
 
-<div class="box">
-    <h2> マイページ</h2>
-     <li> 氏名: <%= @user.first_name %><%= @user.last_name %></li>
-     <li> 郵便番号: <%= @user.post_code %></li>
-     <li> 電話番号: <%= @user.phone_number %></li>
-     <li> ユーザー名: <%= @user.user_name %></li>
-     <li> Email:  <%= @user.email %></li>
+<div class="container">
+   <div class="row">
+   	 <div class="col-md-4 col-md-offset-4">
+       <h2> マイページ</h2>
+         <li> 氏名: <%= @user.first_name %><%= @user.last_name %></li>
+         <li> 郵便番号: <%= @user.post_code %></li>
+         <li> 電話番号: <%= @user.phone_number %></li>
+         <li> ユーザー名: <%= @user.user_name %></li>
+         <li> Email:  <%= @user.email %></li>
+     </div>
+   </div>
     <div align="right">
     	<P> ※登録情報は配送時に使用します。</P>
-    	
-    
 	    <ul>
  	      <li></li><button type="button" class="btn btn-primary ">注文履歴</button></li>
 	      <li><button type="button" class="btn btn-primary ">登録情報編集</button></li>

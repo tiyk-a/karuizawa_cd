@@ -23,11 +23,18 @@ class InquiriesController < ApplicationController
   end
 
   def show
-    @inquiry= find(params[:id])
-    
+    @inquiry=Inquiry.find(params[:id])
+  
   end
-
+            
   def edit
+  end
+  
+  def destroy
+    @inquiry=Inquiry.find(params[:id])
+    if @inquiry.destroy
+      redirect_to inquiries_path
+    end
   end
   
  private

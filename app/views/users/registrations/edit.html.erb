@@ -1,54 +1,63 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-
+<div class= "container">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="form-group row">
-      <div class="col-sm-4">
+     <div class="row">
+      <div class="col-lg-6">
          <%= f.label :last_name , "姓" %>
          <%= f.text_field :last_name %>
+         
+         <%= f.label :first_name, "名" %>
+         <%= f.text_field :first_name %>
       </div>
-
-   <div class="form-group row">
-         <div class="col-sm-4">
-            <%= f.label :last_name_kana, "姓(カナ)" %>
-            <%= f.text_field :last_name_kana %>
-        </div>
- 
-   <div class="col-sm-4">
+     </div>
+     <div class="row">
+       <div class="col-lg-6">
+         <%= f.label :last_name_kana, "姓(カナ)" %>
+         <%= f.text_field :last_name_kana %>
+      
         <%= f.label :first_name_kana, "名(カナ)" %> 
-        <%= f.email_field :first_name_kana%>
-      </div>
-      <div class="field">
+        <%= f.text_field :first_name_kana%>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-lg-6">
          <%= f.label :post_code, "郵便番号" %> 
-         <%= f.email_field :post_code%>
+         <%= f.text_field :post_code%>
+         </div>
       </div>
-      <div class="field">
+      <div class="row">
+       <div class="col-lg-6">
          <%= f.label :phone_number, "電話番号" %> 
-         <%= f.email_field :phone_number%>
+         <%= f.text_field :phone_number%>
+       </div>
       </div>
-      <div class="field">
+      <div class="row">
+       <div class="col-lg-6">
          <%= f.label :user_name, "ユーザー名" %> 
-         <%= f.email_field :user_name%>
+         <%= f.text_field :user_name%>
+       </div>
       </div>
       
    <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
   
-
+</div>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
-
+</div>
+</div>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+<

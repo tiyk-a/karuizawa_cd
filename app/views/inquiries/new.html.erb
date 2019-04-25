@@ -1,22 +1,20 @@
 <h1>お問い合わせフォーム</h1>
-<p>商品、お買い物、当店についてのお問い合わせはこちらからどうぞ。3営業日以内に返信いたします。</p>
-<div class="col-lg-4">
-<%= form_for (@inquiry) do |f| %>
-<%= render 'layouts/error_messages', model: f.object %>
-  <div>
-  <%= f.label :inquiry_Email %>
-  <%= f. text_field :inquiry_email, class: "form-control" %>
-  </div>
-	<div>
-	<%= f.label :inquiry_category %>
-  	<%= f.text_field :inquiry_category, class: "form-control" %>
-  	</div>
-  	<div>
-	<%= f.label :inquiry_body %>
-  	<%= f.text_area :inquiry_body, rows: "5", class: "form-control" %>
-  	</div>
-  	<%= f.submit  class: "btn btn-default" %>
-  	 <%= link_to "logout",  destroy_user_session_path, method: :delete,class:"glyphicon glyphicon-log-out logout" %>
-<% end %>
-</div>
-   
+    <p>商品、お買い物、当店についてのお問い合わせはこちらからどうぞ。3営業日以内に返信いたします。</p>
+    <div class="col-lg-4">
+        <%= form_for (@inquiry) do |f| %>
+           <%= render 'layouts/error_messages', model: f.object %>
+           <div>
+              <%= f.label :inquiry_Email %>
+              <%= f. text_field :inquiry_email, class: "form-control" %>
+           </div>
+	       <div>
+	          <%= f.label :inquiry_category %>
+  	          <%= f.text_field :inquiry_category, class: "form-control" %>
+  	       </div>
+  	       <div>
+	          <%= f.label :inquiry_body %>
+  	          <%= f.text_area :inquiry_body, rows: "5", class: "form-control" %>
+  	       </div>
+  	       <%= f.submit  class: "btn btn-default" %>
+        <% end %>
+    </div>

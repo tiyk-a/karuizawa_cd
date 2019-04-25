@@ -41,7 +41,7 @@ delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
   :registrations => 'users/registrations',
   :sessions => 'users/sessions'   
 } 
-  resources :users, only: [:show, :index, :create,:edit]
+  resources :users
   devise_scope :user do
     get "user/:id", :to => "users#show"
     get "signup", :to => "users/registrations#new"
