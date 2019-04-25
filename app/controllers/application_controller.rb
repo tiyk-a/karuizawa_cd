@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+
 	protect_from_forgery with: :exception
+
 	before_action :set_search
 	helper_method :current_cart
 
@@ -16,6 +18,7 @@ class ApplicationController < ActionController::Base
 		@search_cds = @search.result.includes(:artist)
 	end
 
+
 	def current_cart
 		if session[:cart_id]
 			@cart = Cart.find(session[:cart_id])
@@ -29,4 +32,5 @@ private
 def search_params
 	params.require(:q).permit(:cd_title_cont)
 end
+
 end
