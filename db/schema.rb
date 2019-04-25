@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_04_20_024333) do
+ActiveRecord::Schema.define(version: 2019_04_21_093943) do
 
   create_table "artists", force: :cascade do |t|
     t.string "artist_name"
@@ -127,6 +128,14 @@ ActiveRecord::Schema.define(version: 2019_04_20_024333) do
     t.integer "cd_id"
     t.string "pickup_title"
     t.text "pickup_body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pickups", force: :cascade do |t|
+    t.integer "cd_id", null: false
+    t.string "pickup_title", null: false
+    t.text "pickup_body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -66,6 +66,7 @@
 					</div>
 
 					<div class="inline-block">
+
 						<button type="button" data-toggle="modal" data-target="#exampleModal">
   							<i class="far fa-heart" aria-hidden="true"></i>
 						</button>
@@ -91,6 +92,15 @@
   							</div>
 						</div>
 					</div>
+
+						<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">
+  							<i class="far fa-heart" aria-hidden="true"></i>
+						</button>
+						<%= @cd.favorites.count %>
+						<%= render 'modal' %>
+					</div>
+
+
 			<% end %>
 
 				<% if user_signed_in? && current_user.admin?  %>
@@ -176,9 +186,18 @@
 											</div>
 										<%= f.submit %>
 										<% end %>
+
 									</div>
 									<% else %>
 										<strong><%= link_to "返信するためにはログインしてください!", new_user_session_path %></strong>
+
+									<% else %>
+										<div class="inline-block">
+											<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">返信</button>
+												<%= render 'modal' %>
+										</div>
+										</div>
+
 									<% end %>
 								</td>
 							</tr>
@@ -200,7 +219,17 @@
 				<% end %>
 				</div>
 				<% else %>
+
+        
 					<strong><%= link_to "コメントをするにはログインしてください!", new_user_session_path %></strong>
+        
+        
+				<div class="inline-block">
+					<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">コメントを送る</button>
+						<%= render 'modal' %>
+				</div>
+        
+        
 				<% end %>
 <!-- [END] New Comment -->
 			</div>
