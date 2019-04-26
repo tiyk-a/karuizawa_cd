@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:create, :index, :show]
   resources :cds do
 
+
     #ryo
     resources :disc_numbers,only:[:new, :edit, :create, :update, :destroy] do
       resources :songs,only:[:new, :edit, :create, :update, :destroy]
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
     end
     resource :favorite, only: [:create, :destroy]
   end
+
+  # resources :cart_items, only: [:create, :update, :destroy]
 
   delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
 
@@ -40,7 +43,8 @@ Rails.application.routes.draw do
   post '/add_item' => 'carts#add_item', as: 'add_item'
   post '/update_item' => 'carts#update_item',as: 'update_item'
   delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
-
+  post '/cds/item' => 'cds#create_item',as: 'create_item'
+  resources :orders, only: [:create]
 
   # get 'categories/index'
   # get 'categories/show'

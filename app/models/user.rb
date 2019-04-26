@@ -23,7 +23,8 @@ class User < ApplicationRecord
 
 
   #ryo
-  has_many :cart_items, dependent: :destroy
+  has_many :carts
+  has_many :cart_items, through: :cart
   has_many :orders, dependent: :destroy
 
 

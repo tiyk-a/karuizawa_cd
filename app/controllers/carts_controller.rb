@@ -3,20 +3,15 @@ class CartsController < ApplicationController
   before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
   def cart
-    @cart_items = CartItem.all
+    @cart = current_cart
   end
 
   def add_item
-    if @cart_item.blank?
-      @cart_item = current_cart.cart_items.build(cd_id: params[:cd_id])
-    end
+    @cart_item = CartItem.find(params[:id])
     @cart_item.quantity += params[:quantity].to_i
-    @cart_item.cd_id = params[:format].to_i
-    @cart_item.user_id = current_user.id
+    @cart_item.cd_id = params[:cd_id].to_i
     @cart_item.save
-
-
-    #redirect_to current_cart
+    redirect_to cart_path
   end
 
   def update_item

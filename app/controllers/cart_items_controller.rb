@@ -1,9 +1,16 @@
 class CartItemsController < ApplicationController
   def create
-    @cart = current_cart
-    @cart_item = @cart.cart_items.new(cart_item_params)
-    @cart.save
-    session[:cart_id] = @cart.id
+    @cart_item = CartItem.new(cart_item_params)
+    if user_signed_in?
+      @cart_item.user_id = current_user
+    else
+      @cart_item.user_id = 0
+    end
+    if @cart_item.save
+      redirect_to cd_path
+    else
+      render :show
+    end
   end
 
   def update
@@ -21,6 +28,6 @@ class CartItemsController < ApplicationController
   end
 private
   def cart_item_params
-    params.require(:cart_item).permit(:quantity, :cd_id)
+    params.require(:cart_item).permit(:quantity, :cd_id, :user_id, :cart_id)
   end
 end

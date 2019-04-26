@@ -1,13 +1,55 @@
+<div class="blank">
+</div>
+
 <div class="body">
 	<div class="container">
 		<div clas="row">
-			<% if @cart_items.nil? %>
-			<p class="text-center">カートが空です</p>z
+			<div class="notif-top">
+    			<% if flash[:notice] %>
+       			 <div class="flash bg-warning">
+        			<%= flash[:notice] %>
+       			 </div>
+    			<% end %>
+			</div>
+
+			<% if @cart.cart_items.present? %>
+			<table>
+				<th>Product</th>
+				<th></th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+				<% @cart.cart_items.each do |item| %>
+				<tr>
+					<td><%= attachment_image_tag(item.cd, :cd_image, :fill, 200, 200) %></td>
+					<td><%= item.cd.cd_title %><br><%= item.cd.artist.artist_name %></td>
+					<td><%= item.cd.price %></td>
+					<td><%= item.quantity %></td>
+					<td><%= item.quantity * item.cd.price %></td>
+				</tr>
+				<% end %>
+			</table>
 			<% else %>
-			<% @cart_items.each do |cart_item| %>
-			<%= @cart_item %>
-			<% end %>
+				<p class="text-center">カートが空です</p>
 			<% end %>
 		</div>
 	</div>
+
+	<div>
+		<%= link_to "Checkout", checkout_path, class: "btn btn-default"  %>
+	</div>
 </div>
+
+<style>
+.blank {
+	height: 300px;
+	width: 100%;
+	background-color: pink;
+}
+table th {
+	padding: 0 10px;
+}
+table td {
+	padding: 0 10px;
+}
+</style>

@@ -1,1 +1,62 @@
-checkout
+<div class="container">
+	<div class="row">
+<%= render 'orders/header' %>
+<h1>Shipping address</h1>
+<% if @user.last_name.present? && @user.first_name.present? %>
+<h3>Use User's address?</h3>
+<%= form_for(@order) do |f| %>
+	<div>
+	<%= f.label :gift_address %>
+	<%= f.text_field :gift_address, value: @user.post_code %>
+	</div>
+
+	<div>
+	<%= f.label :gift_postcode %>
+	<%= f.text_field :gift_postcode, value: @user.post_code %>
+	</div>
+
+	<div>
+	<%= f.label :gift_name %>
+	<%= f.text_field :gift_name, value: @user.last_name + @user.first_name %>
+	</div>
+
+	<div>
+	<%= f.label :gift_phone_number %>
+	<%= f.text_field :gift_phone_number, value: @user.phone_number %>
+	</div>
+<div>
+<%= f.submit class: "btn btn-default" %>
+</div>
+<% end %>
+<% end %>
+
+<h3>Use Other address?</h3>
+<%= form_for(@order) do |f| %>
+	<div>
+	<%= f.label :street_address %>
+	<%= f.text_field :street_address %>
+	</div>
+	<div>
+	<%= f.label :district_address %>
+	<%= f.text_field :district_address %>
+	</div>
+	<div>
+	<%= f.label :delivery_post_code %>
+	<%= f.text_field :delivery_post_code %>
+	</div>
+<div>
+<%= f.submit %>
+</div>
+<% end %>
+
+</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#fst').html('<i class="fas fa-circle"></i>')
+	});
+</script>
+	<div>
+		<%= link_to "Confirmation", confirmation_path, class: "btn btn-default" %>
+	</div>
