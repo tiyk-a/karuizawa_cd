@@ -131,14 +131,6 @@ ActiveRecord::Schema.define(version: 2019_04_24_110508) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pick_ups", force: :cascade do |t|
-    t.integer "cd_id"
-    t.string "pickup_title"
-    t.text "pickup_body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pickups", force: :cascade do |t|
     t.integer "cd_id", null: false
     t.string "pickup_title", null: false

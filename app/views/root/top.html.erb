@@ -29,14 +29,30 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">新着音楽</div>
 					<div class="panel-body">
+						<div >
+							<% @cds.each do |cd| %>
+							<%= link_to attachment_image_tag(cd, :cd_image, :fill, 250, 250), cd_path(cd.id) %>
+							<p><%= link_to cd.cd_title, cd_path(cd.id) %></p>
+							<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></p>
+							<p>価格: <%= cd.price %></p>
+							<% end %>
+						</div>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">新着コメント</div>
 					<div class="panel-body">
+						<div >
+							<% @comments.each do |comment| %>
+							<%= link_to attachment_image_tag(comment.cd, :cd_image, :fill, 250, 250), cd_path(comment.cd.id) %>
+							<p><%= comment.user.user_name %></p>
+							<p><%= comment.comment_body %></p>
+							<% end %>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
