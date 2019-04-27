@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_admin, only: [:index]
 
   def index
     @users = User.all
@@ -6,7 +8,7 @@ class UsersController < ApplicationController
 
 
   def show
-   @user = User.find(1)
+   @user= current_user
    @favorites = Favorite.all
   end
 
