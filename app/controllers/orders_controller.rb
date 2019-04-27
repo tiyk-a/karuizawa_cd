@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
 	def create
 		@order = Order.new(order_params)
+		@order.planned_delivery_date = Date.today + 2
 		if @order.save
 			current_cart.cart_items.each do |item|
 				order_item = @order.order_items.build
@@ -29,8 +30,8 @@ class OrdersController < ApplicationController
 	end
 
 	def omise
-    Omise.public_api_key = "pkey_test_5foi4m825d26y7vq0c2"
-    Omise.secret_api_key = "skey_test_5foi4m82or1t4h601jg"
+    Omise.public_api_key = "YOUR KEY"
+    Omise.secret_api_key = "YOUR KEY"
     token = Omise::Token.create(
       :card => {:name => params[:name],
         :number => params[:number],
@@ -51,7 +52,17 @@ class OrdersController < ApplicationController
 	end
 
 	def status
-		@order = Order.where(cart_id: current_cart.id).last
+		@order = Order.find(params[:id])
+	end
+
+	def status_edit
+		@order = Order.find(params[:id])
+	end
+
+	def update
+		@order = Order.find(params[:id])
+		@order.update(order_params)
+		redirect_to status_path(@order)
 	end
 
 	private

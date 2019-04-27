@@ -1,6 +1,7 @@
 class CdsController < ApplicationController
   def index
     @cds = Cd.all.reverse_order
+    @cart_item = CartItem.new
   end
 
   def new

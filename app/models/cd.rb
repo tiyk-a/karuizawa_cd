@@ -16,6 +16,7 @@ class Cd < ApplicationRecord
 	accepts_nested_attributes_for :disc_numbers, reject_if: :all_blank, allow_destroy: true
 
 	has_many :cart_items, dependent: :destroy
+	has_many :order_items
 
 
 

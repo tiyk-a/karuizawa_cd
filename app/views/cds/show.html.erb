@@ -15,44 +15,49 @@
 		<div class="col-lg-6">
 			<strong><%= @cd.cd_title %></strong>
 			<p><%= link_to @cd.artist.artist_name, artist_path(@cd.artist.id) %></p>
-			<p>価格: <%= @cd.price %></p>
+			<p>価格: ¥ <%= @cd.price %></p>
 			<% if user_signed_in? && current_user.admin?  %>
 				<p>在庫数: <%= @cd.stock %></p>
 			<% end %>
 
 			<div>
-<!-- only for user(before) -->
+
 					<div class="inline-block">
-							<%= form_for @cart_item, url: create_item_path do |f| %>
+						<% if current_cart.cart_items.find_by(cd_id: @cd.id).present? %>
+							<div class="itemInCartNotif">
+								<p>This product is alredy in your cart!</p>
+							</div>
+							<% itemInCart = current_cart.cart_items.find_by(cd_id: @cd.id) %>
+							<%= form_for(itemInCart) do |f| %>
 							<%= render 'layouts/error_messages', model: f.object %>
 								<div class="inline-block">
-									<p>数量: <%= f.number_field :quantity, class: "form-control" %></p>
+									<p>数量: <%= f.number_field :quantity, class: "quantity-field" %></p>
 								</div>
-								<%= f.hidden_field :cd_id, value: @cd.id %>
-								<%= f.hidden_field :cart_id, value: current_cart.id %>
-								<%= f.submit %>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
 										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
 									<% end %>
 								</div>
 							<% end %>
+						<% else %>
+							<%= form_for(@cart_item) do |f| %>
+							<%= render 'layouts/error_messages', model: f.object %>
+								<div class="inline-block">
+									<p>数量: <%= f.number_field :quantity, class: "quantity-field" %></p>
+								</div>
+								<%= f.hidden_field :cd_id, value: @cd.id %>
+								<%= f.hidden_field :cart_id, value: current_cart.id %>
+								<div class="inline-block">
+									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
+										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+									<% end %>
+								</div>
+							<% end %>
+						<% end %>
 					</div>
 				<% if user_signed_in? %>
 					<div class="inline-block">
-						<% if @cd.favorited_by?(current_user) %>
-							<div>
-								<%= link_to cd_favorite_path(@cd), method: :delete do %>
-								<i class="far fa-heart" aria-hidden="true" style="color: red;"></i><%= @cd.favorites.count %>
-								<% end %>
-							</div>
-						<% else %>
-							<div>
-							<%= link_to cd_favorite_path(@cd), method: :post do %><%= @cd.favorites.count %>
-							<i class="far fa-heart" aria-hidden="true"></i>
-							<% end %>
-							</div>
-						<% end %>
+						<%= render 'favorite', cd: @cd %>
 					</div>
 				<% else %>
 					<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">
@@ -207,5 +212,13 @@
 	}
 	.inline-block {
 		display: inline-block;
+	}
+	.quantity-field {
+		width: 50px;
+		border-radius: 3px;
+	}
+	.itemInCartNotif {
+		background-color: pink;
+		padding: 5px 10px 0 10px;
 	}
 </style>

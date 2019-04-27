@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   # Chiharu
   get '/payment' => 'orders#payment',as: 'payment'
   get '/status/:id' => 'orders#status',as: 'status'
+  get '/status_edit/:id' => 'orders#status_edit',as: 'status_edit'
 
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
   resources :cart_items, only:[:create, :update, :destroy]
@@ -50,7 +51,7 @@ Rails.application.routes.draw do
   post '/update_item' => 'carts#update_item',as: 'update_item'
   delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
-  resources :orders, only: [:create]
+  resources :orders, only: [:create, :edit, :update]
 
   # get 'categories/index'
   # get 'categories/show'
