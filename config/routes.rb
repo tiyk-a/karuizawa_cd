@@ -32,11 +32,17 @@ Rails.application.routes.draw do
   resources :pickups, only: [:new, :create, :edit, :update, :show, :destroy]
   get '/search', to: 'searches#result', as: :search
 
+  post '/omise' => "orders#omise"
+
 
   #ryo
   root :to => "root#top"
   get '/about' => 'root#about',as: 'about'
   get '/checkout' => 'orders#checkout',as: 'checkout'
+  # Chiharu
+  get '/payment' => 'orders#payment',as: 'payment'
+  get '/status/:id' => 'orders#status',as: 'status'
+
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
   resources :cart_items, only:[:create, :update, :destroy]
   get '/cart' => 'carts#cart',as: 'cart'
@@ -60,9 +66,9 @@ Rails.application.routes.draw do
   #kazumi
   devise_for :users, :controllers => {
   :registrations => 'users/registrations',
-  :sessions => 'users/sessions'   
+  :sessions => 'users/sessions'
 } 
-  resources :users
+  resources :users, only: [:edit, :update, :index, :show, :destroy]
   devise_scope :user do
     get "user/:id", :to => "users#show"
     get "signup", :to => "users/registrations#new"

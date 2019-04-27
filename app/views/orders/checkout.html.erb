@@ -1,10 +1,14 @@
+<div class="blank">
+</div>
 <div class="container">
 	<div class="row">
 <%= render 'orders/header' %>
 <h1>Shipping address</h1>
+<% if user_signed_in? %>
 <% if @user.last_name.present? && @user.first_name.present? %>
 <h3>Use User's address?</h3>
 <%= form_for(@order) do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
 	<div>
 	<%= f.label :gift_address %>
 	<%= f.text_field :gift_address, value: @user.post_code %>
@@ -25,29 +29,45 @@
 	<%= f.text_field :gift_phone_number, value: @user.phone_number %>
 	</div>
 <div>
+	<%= f.hidden_field :cart_id, value: current_cart %>
+	<%= f.hidden_field :user_id, value: @user.id %>
 <%= f.submit class: "btn btn-default" %>
 </div>
 <% end %>
 <% end %>
+<% end %>
 
-<h3>Use Other address?</h3>
+<h3>Input Address to Deliver Your Shopping</h3>
 <%= form_for(@order) do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
 	<div>
-	<%= f.label :street_address %>
-	<%= f.text_field :street_address %>
+	<%= f.label :gift_address %>
+	<%= f.text_field :gift_address %>
 	</div>
 	<div>
-	<%= f.label :district_address %>
-	<%= f.text_field :district_address %>
+	<%= f.label :gift_postcode %>
+	<%= f.text_field :gift_postcode %>
 	</div>
 	<div>
-	<%= f.label :delivery_post_code %>
-	<%= f.text_field :delivery_post_code %>
+	<%= f.label :gift_name %>
+	<%= f.text_field :gift_name %>
 	</div>
+
+	<div>
+	<%= f.label :gift_phone_number %>
+	<%= f.text_field :gift_phone_number %>
+	</div>
+	<% if user_signed_in? %>
+	<%= f.hidden_field :user_id, value: @user.id %>
+	<% else %>
+	<%= f.hidden_field :cart_id, value: current_cart.id %>
+	<%= f.hidden_field :user_id, value: 0 %>
+	<% end %>
 <div>
-<%= f.submit %>
+<%= f.submit class: "btn btn-default" %>
 </div>
 <% end %>
+
 
 </div>
 </div>
@@ -57,6 +77,10 @@
 		$('#fst').html('<i class="fas fa-circle"></i>')
 	});
 </script>
-	<div>
-		<%= link_to "Confirmation", confirmation_path, class: "btn btn-default" %>
-	</div>
+<style>
+.blank {
+	height: 300px;
+	width: 100%;
+	background-color: pink;
+}
+</style>

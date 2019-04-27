@@ -1,1 +1,26 @@
-confirmation
+<div class="blank">
+</div>
+<div class="container">
+	<div class="row">
+<%= render 'orders/header' %>
+<h3>Your Payment has confirmed</h3>
+
+<h3>The delivery will be planned on #####</h3>
+
+<%= link_to "Confirm Your Shopping", status_path(@order), class: "btn btn-default" %>
+</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#fst').html('<i class="fas fa-circle"></i>')
+		$('#snd').html('<i class="fas fa-circle"></i>')
+		$('#trd').html('<i class="fas fa-circle"></i>')
+	});
+</script>
+<style>
+.blank {
+	height: 300px;
+	width: 100%;
+	background-color: pink;
+}
+</style>

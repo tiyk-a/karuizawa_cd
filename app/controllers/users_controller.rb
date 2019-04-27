@@ -1,22 +1,19 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_admin, only: [:index]
- 
+
   def index
     @users = User.all
   end
-  
- 
+
 
   def show
-   @user= current_user
+   @user = User.find(1)
    @favorites = Favorite.all
   end
-  
+
    def new
-      @user= User.new
+      @user = User.new
    end
-  
+
    def create
     
       @user= User.new(user_params)

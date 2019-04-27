@@ -1,0 +1,63 @@
+<div class="blank">
+</div>
+<div class="container">
+	<div class="row">
+<%= render 'orders/header' %>
+<h3>Shipping Status</h3>
+<table>
+	<th>Status</th>
+	<th>Status Icon</th>
+	<th>Date</th>
+	<tr>
+		<td>Preparing</td>
+		<% if @order.ready_to_shipping_date.present? %>
+		<td class="colored"><i class="far fa-circle"></i></td>
+		<td><%= @order.planned_delivery_date %></td>
+		<% else %>
+		<td class="white"><i class="far fa-circle"></i></td>
+		<td></td>
+		<% end %>
+	</tr>
+	<tr>
+		<td>Ready to Ship</td>
+		<% if @order.ready_to_shipping_date.present? %>
+		<td class="colored"><i class="far fa-circle"></i></td>
+		<td><%= @order.ready_to_shipping_date %></td>
+		<% else %>
+		<td class="white"><i class="far fa-circle"></i></td>
+		<td></td>
+		<% end %>
+	</tr>
+	<tr>
+		<td>Shipped</td>
+		<% if @order.ready_to_shipping_date.present? %>
+		<td id="shipping"><i class="far fa-circle"></i></td>
+		<td><%= @order.shipping_date %></td>
+		<% else %>
+		<td class="white"><i class="far fa-circle"></i></td>
+		<td></td>
+		<% end %>
+	</tr>
+</table>
+
+<h3>Order Id is <%= @order.id %></h3>
+
+<%= link_to "Back to Top", root_path, class: "btn btn-default" %>
+</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#fst').html('<i class="fas fa-circle"></i>')
+		$('#snd').html('<i class="fas fa-circle"></i>')
+		$('#trd').html('<i class="fas fa-circle"></i>')
+		$('#lst').html('<i class="fas fa-circle"></i>')
+		$('.colored').html('<i class="fas fa-circle"></i>')
+	});
+</script>
+<style>
+.blank {
+	height: 300px;
+	width: 100%;
+	background-color: pink;
+}
+</style>

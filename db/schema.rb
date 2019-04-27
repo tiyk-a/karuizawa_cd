@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_110508) do
+ActiveRecord::Schema.define(version: 2019_04_27_020528) do
 
   create_table "artists", force: :cascade do |t|
     t.string "artist_name"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_110508) do
     t.integer "user_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_carts_on_deleted_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -127,6 +129,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_110508) do
     t.string "gift_phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cart_id"
+    t.integer "amount"
   end
 
   create_table "pick_ups", force: :cascade do |t|
