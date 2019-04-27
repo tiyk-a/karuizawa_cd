@@ -17,6 +17,7 @@ class Cd < ApplicationRecord
 
 	has_many :cart_items, dependent: :destroy
 	has_many :order_items
+	acts_as_paranoid
 
 
 

@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :cart_items, through: :cart
   has_many :orders, dependent: :destroy
 
+#chiharu
+  acts_as_paranoid
 
 
 end

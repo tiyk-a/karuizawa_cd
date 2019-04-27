@@ -12,9 +12,6 @@ class UsersController < ApplicationController
    @favorites = Favorite.all
   end
 
-   def new
-      @user = User.new
-   end
 
    def create
     

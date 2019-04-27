@@ -22,7 +22,6 @@ Rails.application.routes.draw do
     resource :favorite, only: [:create, :destroy]
   end
 
-  # resources :cart_items, only: [:create, :update, :destroy]
 
   delete 'cd/:id/comments/:id', to: 'comments#destroy', as: 'cd_comment'
 
@@ -47,34 +46,12 @@ Rails.application.routes.draw do
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
   resources :cart_items, only:[:create, :update, :destroy]
   get '/cart' => 'carts#cart',as: 'cart'
-  post '/add_item' => 'carts#add_item', as: 'add_item'
-  post '/update_item' => 'carts#update_item',as: 'update_item'
-  delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
   resources :orders, only: [:create, :edit, :update]
 
-  # get 'categories/index'
-  # get 'categories/show'
-  # get 'labels/index'
-  # get 'cds/new'
-  # get 'cds/index'
-  # get 'cds/show'
-  # get 'cds/edit'
-  # get 'artists/new'
-  # get 'artists/edit'
-  # get 'artists/show'
   
   #kazumi
-  devise_for :users, :controllers => {
-  :registrations => 'users/registrations',
-  :sessions => 'users/sessions'
-} 
-  resources :users, only: [:edit, :update, :index, :show, :destroy]
-  devise_scope :user do
-    get "user/:id", :to => "users#show"
-    get "signup", :to => "users/registrations#new"
-    get "users/edit", :to => "users/registrations#edit"
-    get "login", :to => "users/sessions#new"
-    get "logout", :to => "users/sessions#destroy"
-  end
+  devise_for :users
+  resources :users
+
 end
