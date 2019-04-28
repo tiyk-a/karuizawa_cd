@@ -1,7 +1,7 @@
 
 <div class="container">
    <div class="row">
-   	 <div class="col-md-4 col-md-offset-4">
+   	 <div class="col-lg-8">
        <h2> マイページ</h2>
        <% if @user.first_name.present? %>
          <li> 氏名: <%= @user.first_name %><%= @user.last_name %></li>
@@ -11,24 +11,34 @@
          <li> Email:  <%= @user.email %></li>
          <% end %>
      </div>
-   </div>
-    <div align="right">
+    <div class="col-lg-4">
     	<P> ※登録情報は配送時に使用します。</P>
 	    <ul>
- 	      <li></li><button type="button" class="btn btn-primary ">注文履歴</button></li>
-	      <li><button type="button" class="btn btn-primary ">登録情報編集</button></li>
-	      <li><button type="button" class="btn btn-primary ">お問い合わせ</button></li>
-	        <%= link_to "logout",  destroy_user_session_path, method: :delete,class:"glyphicon glyphicon-log-out logout" %>
+ 	      <li><button type="button" class="btn btn-default"><%= link_to "注文履歴", root_path %></button></li>
+	      <li><button type="button" class="btn btn-default"><%= link_to "登録情報編集", edit_user_path(current_user) %></button></li>
+	      <li><button type="button" class="btn btn-default"><%= link_to "お問い合わせ", new_inquiry_path %></button></li>
+	     <li><%= link_to "logout",  destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>
 	    </ul>
     </div>
-   
+  </div>
+</div>
+
+<div class="container">
+   <div class="row">
+     <div class="col-lg-12">
   <h2> お気に入り一覧</h2>
-   	<% @favorites.each do |favorite| %>
-	  <div class="eachFavarites">
-	    <%= link_to category_path(favorite.id) do %>
-		  <%= attachment_image_tag category.cds.last, :cd_image, :fill, 100, 100, fallback: "no_image.jpg" %>
-		<% end %>
-		<p><%= link_to category.category_name, category_path(category.id) %></p>
-	   </div>
-	 <% end %>
+   	<% @user.favorites.each do |f| %>
+    <div class="eachFavarites">
+      <div>
+      <%= link_to cd_path(f.cd.id) do %>
+        <%= attachment_image_tag f.cd, :cd_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+      <% end %>
+      </div>
+      <div>
+       <%= link_to f.cd.cd_title, cd_path(f.cd) %>
+      </div>
+     </div>
+   <% end %>
+</div>
+</div>
 </div>

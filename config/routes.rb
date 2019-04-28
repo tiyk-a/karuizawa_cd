@@ -47,15 +47,20 @@ Rails.application.routes.draw do
   resources :cart_items, only:[:create, :update, :destroy]
   resources :carts, only: [:update]
   get '/check' => 'carts#check',as: 'check'
-  post '/add_item' => 'carts#add_item', as: 'add_item'
-  post '/update_item' => 'carts#update_item',as: 'update_item'
-  delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
   resources :orders, only: [:create, :edit, :update]
 
   
   #kazumi
   devise_for :users
-  resources :users
+  devise_scope :user do
+    get "user/:id", :to => "users#show"
+    get "signup", :to => "users/registrations#new"
+    get "users/:id/edit", :to => "users/registrations#edit"
+    get "login", :to => "users/sessions#new"
+    get "logout", :to => "users/sessions#destroy"
+  end
+
+ resources :users
 
 end

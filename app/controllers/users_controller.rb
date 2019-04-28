@@ -3,18 +3,16 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:index]
 
   def index
-    @users = User.all
+    @users = User.all.reverse_order
   end
 
 
   def show
    @user= current_user
-   @favorites = Favorite.all
   end
 
 
    def create
-    
       @user= User.new(user_params)
       if @user.save
         redirect_to new_user_session_path, notice:'登録完了しました'
@@ -27,7 +25,7 @@ class UsersController < ApplicationController
        @user =current_user
    end
    
-   def updated
+   def update
        @user=User.find(params[:id])
         if @user.update(cd_params)
           flash[:notice] = "更新しました!"
@@ -36,20 +34,17 @@ class UsersController < ApplicationController
           flash[:notice] = "Error!"
           render :edit
         end
-   end       
+  end
  
  def destroy
      @user= User.find(params[:id])
-     if @user.destroy
-         redirect_to users_path
-     end
+     @user.destroy
+     redirect_to users_path
  end
+
    private
   def user_params
     params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password )
   end
 
 end
-
-
-  

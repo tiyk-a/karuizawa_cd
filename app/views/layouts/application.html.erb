@@ -30,11 +30,15 @@
           <li><%= render 'layouts/search', {search: @search} %></li>
           <li><%= link_to "カート",'/check'%>
               <% if current_cart.cart_items.present? %>
-                <%= current_cart.cart_items.count %> Items you have!
+              <% itemCount = 0 %>
+              <% current_cart.cart_items.each do |i| %>
+              <% itemCount += i.quantity %>
+              <% end %>
+                <%= itemCount %> Items you have!
               <% end %><li>
              <li>Your Cart Id is<%= current_cart.id %></li>
           <% if user_signed_in? %>
-          <li>Your ID is <%= current_user.id %><br><%= current_user.email %></li>
+          <li><%= link_to user_path(current_user) do %>Your ID is <%= current_user.id %><br><%= current_user.email %><% end %></li>
           <li><%= link_to "ログアウト", logout_path %></li>
           <% else %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
