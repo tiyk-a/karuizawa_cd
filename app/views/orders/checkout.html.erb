@@ -27,7 +27,7 @@
 	<%= f.text_field :gift_phone_number, value: @user.phone_number %>
 	</div>
 <div>
-	<%= f.hidden_field :cart_id, value: current_cart %>
+	<%= f.hidden_field :cart_id, value: current_cart.id %>
 	<%= f.hidden_field :user_id, value: @user.id %>
 <%= f.submit class: "btn btn-default" %>
 </div>
