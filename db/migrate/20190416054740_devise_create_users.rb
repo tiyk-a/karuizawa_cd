@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.datetime :locked_at
 
 
+      t.string :address
       t.string :last_name
       t.string :first_name
       t.string :last_name_kana

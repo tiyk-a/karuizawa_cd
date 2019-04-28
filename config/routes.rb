@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   get '/search', to: 'searches#result', as: :search
 
   post '/omise' => "orders#omise"
+  post '/add_admin/:id', to: 'users#add_admin', as: :add_admin
+  delete '/destroy_admin/:id', to: 'users#destroy_admin', as: :destroy_admin
 
 
   #ryo
@@ -43,13 +45,15 @@ Rails.application.routes.draw do
   get '/status/:id' => 'orders#status',as: 'status'
   get '/status_edit/:id' => 'orders#status_edit',as: 'status_edit'
 
+# chiharu
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
   resources :cart_items, only:[:create, :update, :destroy]
   resources :carts, only: [:update]
   get '/check' => 'carts#check',as: 'check'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
   resources :orders, only: [:create, :edit, :update]
-
+  get '/stocks' => 'orders#stocks',as: 'stocks'
+# chiharu
   
   #kazumi
   devise_for :users

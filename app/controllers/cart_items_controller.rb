@@ -1,4 +1,7 @@
 class CartItemsController < ApplicationController
+  # before_action :authenticate_user!
+  # before_action :current_cart
+  
   def create
     if
       CartItem.where(cart_id: current_cart, cd_id: params[:cd_id]).exists?

@@ -4,16 +4,17 @@
 	<% if @search_cds.present? %>
 		<% @search_cds.each do |result| %>
 			<div class="col-lg-4 inline-block">
+				<%= link_to cd_path(result) do %>
 				<div>
 				<%= attachment_image_tag(result, :cd_image, :fill, 300, 300) %>
 				</div>
-				<h2><%= result.cd_title %></h2>
+				<h4><%= result.cd_title %></h4>
+				<h5><%= result.artist.artist_name %></h5>
 				<div>
+					<% end %>
 
 					<% if current_cart.cart_items.find_by(cd_id: result.id).present? %>
 							<div class="itemInCartNotif">
-								<p>This product is alredy in your cart!</p>
-							</div>
 							<% itemInCart = current_cart.cart_items.find_by(cd_id: result.id) %>
 							<%= form_for(itemInCart) do |f| %>
 							<%= render 'layouts/error_messages', model: f.object %>
@@ -22,10 +23,12 @@
 								</div>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
-										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+										<i class="fas fa-cart-arrow-down" style="font-size:20px;"></i>
 									<% end %>
 								</div>
 							<% end %>
+							<p class="notifText">購入する数量を変更しますか？</p>
+							</div>
 						<% else %>
 							<%= form_for(@cart_item) do |f| %>
 							<%= render 'layouts/error_messages', model: f.object %>
@@ -36,7 +39,7 @@
 								<%= f.hidden_field :cart_id, value: current_cart.id %>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
-										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+										<i class="fas fa-cart-arrow-down" style="font-size:20px;"></i>
 									<% end %>
 								</div>
 							<% end %>
@@ -74,7 +77,12 @@
 		border-radius: 3px;
 	}
 	.itemInCartNotif {
-		background-color: pink;
+		background-color: lightgray;
 		padding: 5px 10px 0 10px;
+		border-radius: 3px;
+		display: inline-block;
+	}
+	.notifText {
+		font-size: 10px;
 	}
 </style>

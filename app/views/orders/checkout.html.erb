@@ -1,58 +1,58 @@
 <div class="container">
 	<div class="row">
 <%= render 'orders/header' %>
-<h1>Shipping address</h1>
+<h1>配送先住所</h1>
 <% if user_signed_in? %>
 <% if @user.last_name.present? && @user.first_name.present? %>
-<h3>Use User's address?</h3>
+<h3>ユーザー登録住所を使用する</h3>
 <%= form_for(@order) do |f| %>
 <%= render 'layouts/error_messages', model: f.object %>
 	<div>
-	<%= f.label :gift_address %>
-	<%= f.text_field :gift_address, value: @user.post_code %>
+	<%= f.label :gift_address, "配送先住所" %>
+	<%= f.text_field :gift_address, value: @user.address %>
 	</div>
 
 	<div>
-	<%= f.label :gift_postcode %>
+	<%= f.label :gift_postcode, "配送先郵便番号" %>
 	<%= f.text_field :gift_postcode, value: @user.post_code %>
 	</div>
 
 	<div>
-	<%= f.label :gift_name %>
+	<%= f.label :gift_name, "受取人氏名" %>
 	<%= f.text_field :gift_name, value: @user.last_name + @user.first_name %>
 	</div>
 
 	<div>
-	<%= f.label :gift_phone_number %>
+	<%= f.label :gift_phone_number, "受取人電話番号" %>
 	<%= f.text_field :gift_phone_number, value: @user.phone_number %>
 	</div>
 <div>
 	<%= f.hidden_field :cart_id, value: current_cart.id %>
 	<%= f.hidden_field :user_id, value: @user.id %>
-<%= f.submit class: "btn btn-default" %>
+<%= f.submit "この住所を使用する", class: "btn btn-default" %>
 </div>
 <% end %>
 <% end %>
 <% end %>
 
-<h3>Input Address to Deliver Your Shopping</h3>
+<h3>配送先住所を記入する</h3>
 <%= form_for(@order) do |f| %>
 <%= render 'layouts/error_messages', model: f.object %>
 	<div>
-	<%= f.label :gift_address %>
+	<%= f.label :gift_address, "配送先住所" %>
 	<%= f.text_field :gift_address %>
 	</div>
 	<div>
-	<%= f.label :gift_postcode %>
+	<%= f.label :gift_postcode, "配送先郵便番号" %>
 	<%= f.text_field :gift_postcode %>
 	</div>
 	<div>
-	<%= f.label :gift_name %>
+	<%= f.label :gift_name, "受取人氏名" %>
 	<%= f.text_field :gift_name %>
 	</div>
 
 	<div>
-	<%= f.label :gift_phone_number %>
+	<%= f.label :gift_phone_number, "受取人電話番号" %>
 	<%= f.text_field :gift_phone_number %>
 	</div>
 	<% if user_signed_in? %>
@@ -62,7 +62,7 @@
 	<%= f.hidden_field :user_id, value: 0 %>
 	<% end %>
 <div>
-<%= f.submit class: "btn btn-default" %>
+<%= f.submit "この住所を使用する", class: "btn btn-default" %>
 </div>
 <% end %>
 
@@ -72,7 +72,7 @@
 
 <script>
 	$(document).ready(function(){
-		$('#fst').html('<i class="fas fa-circle"></i>')
+		$('#fst').html('<i class="fas fa-circle fa-2x"></i>')
 	});
 </script>
 <style>

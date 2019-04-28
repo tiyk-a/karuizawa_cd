@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, only: [:index]
+  before_action :check_admin, only: [:index, :destroy_admin, :add_admin]
 
   def index
     @users = User.all.reverse_order
@@ -42,9 +42,23 @@ class UsersController < ApplicationController
      redirect_to users_path
  end
 
+ def add_admin
+    @user = User.find(params[:id])
+    @user.admin = true
+    @user.update(user_params)
+    redirect_to users_path
+ end
+
+ def destroy_admin
+    @user = User.find(params[:id])
+    @user.admin = false
+    @user.update(user_params)
+    redirect_to users_path
+ end
+
    private
   def user_params
-    params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password )
+    params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password, :admin)
   end
 
 end

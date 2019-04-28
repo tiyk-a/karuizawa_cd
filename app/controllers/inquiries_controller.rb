@@ -1,4 +1,6 @@
 class InquiriesController < ApplicationController
+  before_action :check_admin, only: [:index, :destroy]
+  
   def index
     @inquiries = Inquiry.all
     @users = User.all

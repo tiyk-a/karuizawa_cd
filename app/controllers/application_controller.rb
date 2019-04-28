@@ -5,13 +5,14 @@ class ApplicationController < ActionController::Base
 
 	before_action :set_search
 	helper_method :current_cart
+	helper_method :check_admin
 
 	def after_sign_in_path_for(resource)
-		cds_path
+		root_path
 	end
 
 	def after_sign_out_path_for(resource)
-		cds_path
+		root_path
 	end
 
 	def set_search
@@ -66,10 +67,9 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-
+#   ログイン済みかどうかの判断
 	def  check_admin
-    #   ログイン済みかどうかの判断
-     if current_user.admin != true
+     if user_signed_in? && current_user.admin != true
          redirect_to root_path
      end
    	end
