@@ -27,6 +27,40 @@ class ApplicationController < ActionController::Base
 			@cart = Cart.create
 			session[:cart_id] = @cart.id
 		end
+# all visitors have one SESSION Cart
+
+		if cart = Cart.find_by(user_id: current_user)
+			@cart = Cart.find(session[:cart_id])
+			if @cart === cart
+			else
+				if @cart.cart_items.present?
+					@cart.cart_items.each do |i|
+						if u_cart_i = cart.cart_items.find_by(cd_id: i.cd_id)
+							u_cart_i.quantity += i.quantity
+							u_cart_i.update
+						else
+							new_cart_i = cart.cart_items.new(cd_id: i.cd_id)
+							new_cart_i.quantity = i.quantity
+							new_cart_i.save
+						end
+					end
+				else
+				end
+			end
+		else
+			if user_signed_in?
+				@cart.user_id = current_user.id
+				@cart.save
+				cart = Cart.find_by(user_id: current_user)
+			else
+			end
+		end
+
+		if cart.present?
+			return cart
+		else
+			return @cart
+		end
 	end
 
 
@@ -48,5 +82,9 @@ private
 def search_params
 	params.require(:q).permit(:cd_title_cont)
 end
+
+  def cart_params
+  	params.require(:cart).permit(:user_id)
+  end
 
 end

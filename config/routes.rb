@@ -45,7 +45,11 @@ Rails.application.routes.draw do
 
   get '/confirmation' => 'orders#confirmation',as: 'confirmation'
   resources :cart_items, only:[:create, :update, :destroy]
-  get '/cart' => 'carts#cart',as: 'cart'
+  resources :carts, only: [:update]
+  get '/check' => 'carts#check',as: 'check'
+  post '/add_item' => 'carts#add_item', as: 'add_item'
+  post '/update_item' => 'carts#update_item',as: 'update_item'
+  delete '/delete_item' => 'carts#delete_item', as: 'delete_item'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
   resources :orders, only: [:create, :edit, :update]
 
