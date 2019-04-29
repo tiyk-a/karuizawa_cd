@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<img src="assets/Sensualidad.jpg" class="img-responsive img-rounded">
+				<img src="/images/Sensualidad.jpg" class="img-responsive img-rounded">
 				<div class="top-menu">
 					<div class="panel panel-default">
 						<div class="panel-heading">新着音楽</div>
@@ -43,10 +43,9 @@
 						<div class="panel-heading">新着コメント</div>
 						<div class="panel-body">
 							<% @comments.each do |comment| %>
-							<div class="cd">
+							<div class="cd text-left">
 								<%= link_to attachment_image_tag(comment.cd, :cd_image, :fill, 250, 250, class: "img-responsive img-rounded"), cd_path(comment.cd.id) %>
-								<p><%= comment.user.user_name %></p>
-								<p><%= comment.comment_body %></p>
+								<p><strong><%= comment.user.user_name %></strong> | <%= comment.comment_body %></p>
 							</div>
 							<% end %>
 						</div>
@@ -68,5 +67,9 @@
 p{
 	width: 250px;
 	text-align: center;
+}
+.text-left p {
+	text-align: left;
+	padding-left: 10px;
 }
 </style>

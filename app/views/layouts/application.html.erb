@@ -21,14 +21,14 @@
       <div class="row">
         <div class="col-lg-12">
           <nav class="nav navbar-nav navbar-left">
-            <span style="color:white;font-size:x-large;"><%= link_to root_path do %><%= image_tag 'cd_logo.png' %><% end %></span>
+            <%= link_to root_path do %><%= image_tag '/images/cd_logo.png' %><% end %>
           </nav>
           <nav>
             <ul class="nav navbar-nav navbar-right" style="color: white;">
               <li><%= link_to "About",'/about' %> </li>
               <li><%= link_to "CD", cds_path %> </li>
               <li><%= render 'layouts/search', {search: @search} %></li>
-              <li><%= link_to check_path do %><i class="fas fa-cart-arrow-down" style="font-size:40px;"></i><% end %>
+              <li><%= link_to check_path do %><i class="fas fa-cart-arrow-down" style="font-size:25px; padding: 0;"></i><% end %>
                 <% if current_cart.cart_items.present? %>
                 <% itemCount = 0 %>
                 <% current_cart.cart_items.each do |i| %>
@@ -36,9 +36,8 @@
                 <% end %>
                 <%= itemCount %> Items you have!
                 <% end %></li>
-                <li>Your Cart Id is<%= current_cart.id %></li>
                 <% if user_signed_in? %>
-                <li><%= link_to user_path(current_user) do %>Your ID is <%= current_user.id %><br><%= current_user.email %><% end %></li>
+                <li><%= link_to user_path(current_user) do %>Hello, <%= current_user.user_name %><% end %></li>
                 <li><%= link_to "ログアウト", logout_path %></li>
                 <% else %>
                 <li><%= link_to "ログイン", new_user_session_path %></li>
@@ -48,8 +47,31 @@
           </div>
         </div>
       </div>
+      <% if user_signed_in? && current_user.admin == true %>
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="whiteText">Hello! Admin User</h3>
+          <ul class="nav navbar-nav navbar-right" style="color: white;">
+            <li><%= link_to "New Artist", new_artist_path %></li>
+            <li><%= link_to "New CD", new_cd_path %></li>
+            <li><%= link_to "Inquiries", inquiries_path %></li>
+            <li><%= link_to "Labels", labels_path %></li>
+            <li><%= link_to "Order All", orders_path %></li>
+            <li><%= link_to "Stocks", stocks_path %></li>
+            <li><%= link_to "New Pickup", new_pickup_path %></li>
+            <li><%= link_to "User List", users_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% end %>
     </header>
     <main>
+      <% if user_signed_in? && current_user.admin == true %>
+      <div id="adminLayout">
+      </div>
+      <% end %>
       <%= yield %>
     </main>
 
@@ -62,7 +84,6 @@
               <li class="list-inline-item"><%= link_to "About",'/about' %></li>
               <li class="list-inline-item">Copyright 2019 πaAll Rights Reserved.</li>
               <li class="list-inline-item"><%= link_to "お問い合わせ",'/inquiries/new' %></li>
-              
             </ul>
           </div>
         </div>
@@ -82,4 +103,14 @@
   main {
     margin-top:100px;
   }
+  .whiteText {
+    color: white;
+    display: inline-block;
+  }
+  #adminLayout {
+    height: 50px;
+    width: 100%;
+    background-color: pink;
+  }
+</style>
 

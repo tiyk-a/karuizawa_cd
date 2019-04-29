@@ -8,7 +8,6 @@
     <h3> </h3>
 </div>
 <table class="table">
-  <h3> 絞り込み </h3>
 <thead>
     <th>id</th>
     <th>姓</th> 
@@ -16,7 +15,7 @@
     <th>フリガナ (氏)</th> 
     <th>フリガナ (名)</th> 
     <th>Email</th> 
-    <th>登録日時</th> 
+    <th>登録日</th> 
     <th>注文回数</th>
     <th>Admin?</th> 
     <th>削除</th> 
@@ -31,12 +30,12 @@
      <td><%= user.last_name_kana %></td>
      <td><%= user.first_name_kana %></td>
      <td><%= user.email %></td>
-     <td><%= user.created_at %></td>
+     <td><%= user.created_at.strftime('%Y年%m月%d日') %></td>
      <td><%= user.orders.count %></td>
      <% if user.admin == true %>
-        <td><%= link_to destroy_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
+        <td><%= link_to "アドミンから削除？", destroy_admin_path(user), method: :post, class: "btn btn-danger btn-sm" %></td>
      <% else %>
-        <td><%= link_to add_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
+        <td><%= link_to "アドミンに設定？", add_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
      <% end %>
      <td><%= link_to 'x', user, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-default btn-sm" %></td>
   </tr>

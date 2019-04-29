@@ -1,6 +1,15 @@
 <dl class="searchbox">
   <%= search_form_for search, url: search_path do |f| %>
-    <dt><%= f.text_field :cd_title_cont ,placeholder: 'CD名を入力' %></dt>
-    <dd><%= f.submit "検索" , class: 'search-btn'%></dd>
+    <dt class="inline-block"><%= f.text_field :cd_title_cont ,placeholder: 'CD名を入力' %></dt>
+   	<dd class="inline-block"><%= f.submit "検索" , class: 'search-btn'%></dd>
   <% end %>
 </dl>
+
+<style>
+	.inline-block {
+		display: inline-block;
+	}
+	.searchbox {
+		padding-top: 10px;
+	}
+</style>

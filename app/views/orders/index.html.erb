@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+<h1>オーダー一覧</h1>
+<table id="ordersTable">
+	<th>購入日</th>
+	<th>購入者ID</th>
+	<th>受取人名</th>
+	<th>配送先郵便番号</th>
+	<th>配送先住所</th>
+	<th>受取人電話番号</th>
+	<th>配送ステータス</th>
+	<th>カートID</th>
+	<% @orders.each do |order| %>
+	<tr>
+		<td><%= order.created_at.strftime('%Y年%m月%d日') %></td>
+		<td><%= order.user_id %></td>
+		<td><%= order.gift_name %></td>
+		<td><%= order.gift_postcode %></td>
+		<td><%= order.gift_address %></td>
+		<td><%= order.gift_phone_number %></td>
+		<td><%= order.delivery_status %></td>
+		<td><%= order.cart_id %></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+</div>
+</div>
+
+<style>
+	#ordersTable th, #ordersTable td  {
+		padding: 10px;
+	}
+</style>

@@ -77,6 +77,10 @@ class OrdersController < ApplicationController
 		@soldOutTable = Cd.only_deleted.reverse_order
 	end
 
+	def index
+		@orders = Order.all.reverse_order
+	end
+
 	private
 	def order_params
 		params.require(:order).permit(:cart_id, :user_id, :planned_delivery_date, :ready_to_shipping_date, :shipping_date, :delivery_status, :gift_address, :gift_postcode, :gift_name, :gift_phone_number)

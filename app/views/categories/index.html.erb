@@ -7,9 +7,9 @@
 				<% if category.id % 3 == 0 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 230, format: "jpg", fallback: "no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
 					<% end %>
-					<p><%= link_to category.category_name, category_path(category.id) %><%= category.id %></p>
+					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
 				<% end %>
 				<% end %>
@@ -19,9 +19,9 @@
 				<% if category.id % 3 == 2 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 230, format: "jpg", fallback: "no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
 					<% end %>
-					<p><%= link_to category.category_name, category_path(category.id) %><%= category.id %></p>
+					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
 				<% end %>
 				<% end %>
@@ -31,9 +31,9 @@
 				<% if category.id % 3 == 1 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 230, format: "jpg", fallback: "no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
 					<% end %>
-					<p><%= link_to category.category_name, category_path(category.id) %><%= category.id %></p>
+					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
 				<% end %>
 				<% end %>
@@ -55,6 +55,19 @@
 	.eachCategory {
 		height: 300px;
 		display: inline-block;
+		position: relative;
 	}
-
+	.eachCategory h1 a {
+		position: absolute;
+		top: 0px;
+		color: white;
+		background-color: black;
+		opacity: 0.8;
+		padding: 10px 5px;
+		width: 210px;
+		text-decoration: none;
+	}
+	.eachCategory h1 a:hover {
+		opacity: 0.5;
+	}
 </style>

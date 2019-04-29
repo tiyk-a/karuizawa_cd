@@ -1,15 +1,17 @@
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<h3>販売中CD</h3>
 				<table id="stockTable">
 					<th>CDタイトル</th>
+					<th>アーティスト名</th>
 					<th>ストック</th>
 					<% @cds.each do |cd| %>
 					<tr>
-						<td><%= cd.cd_title %></td>
+						<td><%= link_to cd.cd_title, cd_path(cd) %></td>
+						<td><%= link_to cd.artist.artist_name, artist_path(cd.artist) %></td>
 						<td><%= cd.stock %></td>
 					</tr>
 					<% end %>
@@ -18,10 +20,12 @@
 				<% if @soldOutCds.present? %>
 					<table id="soldOutTable">
 						<th>CDタイトル</th>
+						<th>アーティスト名</th>
 						<th>ストック</th>
 							<% @soldOutCds.each do |cd| %>
 							<tr>
-								<td><%= cd.cd_title %></td>
+								<td><%= link_to cd.cd_title, cd_path(cd) %></td>
+								<td><%= link_to cd.artist.artist_name, artist_path(cd.artist) %></td>
 								<td><%= cd.stock %></td>
 							</tr>
 							<% end %>
@@ -29,17 +33,23 @@
 				<% else %>
 					<table id="soldOutTable">
 						<th>CDタイトル</th>
+						<th>アーティスト名</th>
 						<th>ストック</th>
 					</table>
 						<h5>欠品中の商品はありません</h5>
 				<% end %>
 			</div>
-			<div class="col-lg-4">
-			</div>
+			<div class="col-lg-3">
+		</div>
 		</div>
 	</div>
 <style>
 	#stockTable th, #stockTable td, #soldOutTable th, #soldOutTable td {
-		padding: 0 10px;
+		padding: 10px;
+	}
+	#stockTable th, #soldOutTable th {
+		background-color: black;
+		color: white;
+		width: 500px;
 	}
 </style>
