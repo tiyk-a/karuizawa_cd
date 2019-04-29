@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:update]
   get '/check' => 'carts#check',as: 'check'
   post '/cds/item' => 'cds#create_item',as: 'create_item'
-  resources :orders, only: [:create, :edit, :update]
+  resources :orders, only: [:create, :edit, :update, :index]
   get '/stocks' => 'orders#stocks',as: 'stocks'
 # chiharu
 
