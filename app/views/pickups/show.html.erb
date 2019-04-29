@@ -25,9 +25,9 @@
 		<div class="col-lg-4">
 			<h3><%= @pickup.cd.cd_title %></h3>
 			<h5><%= link_to @pickup.cd.artist.artist_name, artist_path(@pickup.cd.artist.id) %></h5>
-			<h5>Price: <%= @pickup.cd.price %></h5>
+			<h5>価格: <%= @pickup.cd.price %></h5>
 			<% if user_signed_in? && current_user.admin?  %>
-				<h5>Stocks: <%= @pickup.cd.stock %></h5>
+				<h5>在庫: <%= @pickup.cd.stock %></h5>
 			<% end %>
 
 			<div>
@@ -35,8 +35,11 @@
 					<div class="inline-block">
 							<%= form_for(@cart_item) do |f| %>
 								<div class="inline-block">
-									Quantity: <%= f.number_field :quantity %>
+									数量: <%= f.number_field :quantity %>
 								</div>
+								<%= f.hidden_field :user_id, value: current_user.id %>
+								<%= f.hidden_field :cd_id, value: @pickup.cd_id %>
+								<%= f.hidden_field :cart_id, value: current_cart.id %>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', class: "btn" do %>
 										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
@@ -52,9 +55,11 @@
 					<div class="inline-block">
 							<%= form_for(@cart_item) do |f| %>
 								<div class="inline-block">
-									<p>Quantity: <%= f.number_field :quantity, class: "form-control" %></p>
+									<p>数量: <%= f.number_field :quantity, class: "form-control" %></p>
 								</div>
 								<%= f.hidden_field :user_id, value: "0" %>
+								<%= f.hidden_field :cd_id, value: @pickup.cd_id %>
+								<%= f.hidden_field :cart_id, value: current_cart.id %>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', class: "btn" do %>
 										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
@@ -64,7 +69,7 @@
 					</div>
 
 					<div class="inline-block">
-						<button type="button" data-toggle="modal" data-target="#exampleModal">
+						<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">
   							<i class="far fa-heart" aria-hidden="true"></i>
 						</button>
 						<%= @pickup.cd.favorites.count %>
@@ -100,7 +105,9 @@
 				<%= simple_format(@pickup.pickup_body) %>
 			</div>
 		</div>
+		<% if user_signed_in? && current_user.admin == true %>
 		<%= link_to 'Edit Pickup', edit_pickup_path(@pickup), class: "btn btn-default" %>
+		<% end %>
 	</div>
 </div>
 

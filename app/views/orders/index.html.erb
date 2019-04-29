@@ -20,7 +20,7 @@
 		<td><%= order.gift_address %></td>
 		<td><%= order.gift_phone_number %></td>
 		<td><%= order.delivery_status %></td>
-		<td><%= order.cart_id %></td>
+		<td><%= link_to order.cart_id, status_edit_path(order) %></td>
 	</tr>
 	<% end %>
 </table>

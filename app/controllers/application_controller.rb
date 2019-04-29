@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	protect_from_forgery with: :exception
+	before_action :find_cart
 
 	before_action :set_search
 	helper_method :current_cart
@@ -21,14 +22,13 @@ class ApplicationController < ActionController::Base
 	end
 
 
-	def current_cart
+	def find_cart
 		if user_signed_in? && Cart.find_by(user_id: current_user)
 			# if it was an user who already has a cart
 			@u_cart = Cart.find_by(user_id: current_user)
 			if session[:cart_id]
-				if Cart.find(session[:cart_id]).present? && @s_cart != @u_cart
-					@s_cart = Cart.find(session[:cart_id])
-					if @s_cart.cart_items.present?
+				@s_cart = Cart.find_or_create_by(session[:cart_id])
+				  	if @s_cart != @u_cart && @s_cart.cart_items.present?
 						@s_cart.cart_items.each do|i|
 							if @u_cart.cart_items.find_by(cd_id: i.cd_id)
 								u_item = @u_cart.cart_items.find_by(cd_id: i.cd_id)
@@ -42,28 +42,36 @@ class ApplicationController < ActionController::Base
 							end
 						end
 					end
-				end
+				return @u_cart
 			end
 			return Cart.find_by(user_id: current_user)
 				# if user's cart found, return it
 		else
 			# not signed in guest or signed in user who doesn't have u_cart
 			if session[:cart_id]
-			   @s_cart = Cart.find(session[:cart_id])
-			   # if 1) guest's session-cart found
+			   @s_cart = Cart.find_or_create_by(id: session[:cart_id])
 			   if user_signed_in?
 			   	@s_cart.user_id = current_user
 			   	@s_cart.save
 			   end
-			   # if 2) user's cart created
-			   return @s_cart
-			   # if 1) or 2), return it.
-			else
-				@s_cart = Cart.create
-				session[:cart_id] = @s_cart.id
-				return @s_cart
-				# if guest's session-cart created, return it.
 			end
+			return @s_cart
+		end
+	end
+
+	def current_cart
+		if user_signed_in?
+			if @cart = Cart.find_by(user_id: current_user)
+				return @cart
+			else
+				@s_cart = Cart.find_or_create_by(session[:cart_id])
+				@s_cart.user_id = current_user
+				@s_cart.save
+				return @s_cart
+			end
+		else
+			 @cart = Cart.find_or_create_by(session[:cart_id])
+			 return @cart
 		end
 	end
 

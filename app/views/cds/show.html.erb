@@ -59,7 +59,7 @@
 						<%= render 'favorite', cd: @cd %>
 					</div>
 				<% else %>
-					<button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-default btn-sm">
+					<button type="button" data-toggle="modal" data-target="#exampleModal" class= "btn btn-default btn-sm">
   							<i class="far fa-heart" aria-hidden="true"></i>
 						</button>
 						<%= @cd.favorites.count %>
@@ -87,10 +87,10 @@
 					<% if @cd.comments.present? %>
 						<% @cd.comments.each do |comment| %>
 							<div>
-								<strong><%= comment.user_id %>さんのコメント『<%= comment.comment_body %>』（CDのid: <%= comment.cd_id %>コメントのId: <%= comment.id %>)</strong>
+								<strong><%= comment.user.user_name %>: <%= comment.comment_body %></strong>
 									<% comeid = comment.id %>
 									<% if comment.user == current_user %>
-									<button class="toEditForm">編集</button>
+									<button class="toEditForm btn btn-default btn-sm">編集</button>
 										<div class="EditForm">
 											<%= form_for(comment) do |f| %>
 												<div>
@@ -104,7 +104,7 @@
 									<% end %>
 									<% if user_signed_in? %>
 										<% if current_user.admin? || comment.user == current_user %>
-											<%= link_to "コメントを削除しますか?", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: '本当に削除しますか'} %>
+											<%= link_to "コメント削除", cd_comment_path(@cd.id,comeid.to_i), method: :delete, data: {confirm: '本当に削除しますか'} %>
 										<% end %>
 									<% end %>
 
@@ -112,12 +112,9 @@
 										<table>
 										<% comment.comment_replies.each do |rep| %>
 											<tr>
-												<td>コメントID: <%= rep.comment.id %></td>
-												<td>ユーザーId: <%= rep.user_id %></td>
-												<td><strong><%= rep.comment_reply_body %></strong></td>
-												<td>Id: <%= rep.id %></td>
+												<td><i class="fas fa-arrow-right" style="font-size: 10px;"></i> <%= rep.user.user_name %>: <%= rep.comment_reply_body %></td>
 												<% if rep.user == current_user %>
-												<td><button class="toEditForm">編集</button>
+												<td><button class="toEditForm btn btn-default btn-sm">編集</button>
 													<span class="EditForm">
 														<% @rep = rep %>
 															<%= form_for(@rep) do |f| %>
@@ -133,8 +130,8 @@
 												</td>
 												<% end %>
 											<% if user_signed_in? %>
-												<% if current_user.admin? || comment.user == current_user %>  %>
-												<td><%= link_to "返信を削除しますか?", comment_reply_path(rep.id), method: :delete, data: {confirm: '本当に削除しますか?'} %></td>
+												<% if current_user.admin? || comment.user == current_user %> 
+												<td><%= link_to "返信を削除", comment_reply_path(rep.id), method: :delete, data: {confirm: '本当に削除しますか?'} %></td>
 												<% end %>
 											</tr>
 											<% end %>
@@ -144,7 +141,7 @@
 
 									<% comeid = comment.id %>
 									<% if user_signed_in? %>
-										<button class="toReplyForm">返信</button>
+										<button class="toReplyForm btn btn-default btn-sm">返信</button>
 										<span class="ReplyForm">
 										<%= form_for [comment, @comment_reply], url: comment_comment_replies_path(comment_id: comeid.to_i) do |f| %>
 											<span>
@@ -223,7 +220,7 @@
 <div class="container">
 	<div clas="row">
 		<div class="col-lg-2">
-			<%= link_to "CD一覧に戻る", cds_path, class: "btn btn-default" %>
+			<%= link_to "CD一覧に戻る", cds_path, class: "btn btn-default btn-sm" %>
 		</div>
 		<div class="col-lg-10">
 		</div>

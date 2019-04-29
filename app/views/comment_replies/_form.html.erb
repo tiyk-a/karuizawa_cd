@@ -6,5 +6,5 @@
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.hidden_field_tag :cd_id, value: comment.cd_id %>
 </div>
-<%= f.submit %>
+<%= f.submit "返信", class: "btn btn-default btn-sm" %>
 <% end %>

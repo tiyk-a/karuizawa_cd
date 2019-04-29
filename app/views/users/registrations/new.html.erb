@@ -1,8 +1,10 @@
-<div class="blank">
-</div>
-<h2>ユーザー新規登録</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
+    <h2>ユーザー新規登録</h2>
 
-<div class="example"></div>
   <p>※登録情報は配送時に使用します。</p>
   <P>※登録後にマイページからも編集できます。</P>
   <div class=content_1>
@@ -21,7 +23,7 @@
       <div class="field">
         <%= f.label :password, "パスワード:" %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(最低<%= @minimum_password_length %>文字入力してください )</em>
         <% end %>
         <%= f.password_field :password, class:"password" %>
       </div>
@@ -52,16 +54,21 @@
        <P>※ハイフン不要です</P>
     </div>
   </div>
-    <%= f.submit "signup", class:"btn btn-default" %>
+    <%= f.submit "新規登録", class: "btn btn-primary btn-sm" %>
     <% end %>
-   </div>
+ <div class="col-lg-4">
+ </div>
+</div>
+</div>
 
-
-
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4">
 <%= render "devise/shared/links" %>
-<style>
-  .blank {
-    height: 100px;
-    width:100% ;
-  }
-</style>
+ </div>
+</div>
+</div>

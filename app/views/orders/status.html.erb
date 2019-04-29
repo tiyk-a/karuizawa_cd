@@ -35,9 +35,6 @@
 
 <h3>注文ID： <%= @order.id %></h3>
 <h3>出荷予定日： <%= @order.planned_delivery_date.strftime('%Y年%m月%d日') %></h3>
-
-<%= link_to "トップに戻る", root_path, class: "btn btn-default" %>
-
 		</div>
 
 		<div class="col-lg-4 cartTotal">
@@ -45,6 +42,20 @@
 		</div>
 	</div>
 </div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-7">
+		</div>
+		<div class="col-lg-2">
+			<%= link_to "トップに戻る", root_path, class: "btn btn-default" %>
+		</div>
+		<div class="col-lg-3">
+		</div>
+	</div>
+</div>
+
+
 <script>
 </script>
 <style>

@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="row">
+		<div class="col-lg-8">
 <h3>配送状況編集</h3>
 <%= form_for(@order) do |f| %>
 <table>
@@ -20,10 +21,16 @@
 
 <h3>注文ID： <%= @order.id %></h3>
 <h3>商品到着予定日</h3>
-<td><%= f.datetime_select :planned_delivery_date %></td>
+<%= f.datetime_select :planned_delivery_date %>
+<div style="width: 200px;">
+<%= f.label :delivery_status, "お問い合わせカテゴリー" %>
+<%= f.select :delivery_status, Order.delivery_statuses.keys.to_a, {}, class: "form-control" %>
+</div>
 <%= f.submit "更新" %>
 <% end %>
 <%= link_to "トップに戻る", root_path, class: "btn btn-default" %>
+</div>
+<div class="col-lg-4">
 </div>
 </div>
 <script>

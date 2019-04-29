@@ -15,8 +15,8 @@
 			<%= link_to cd_path(cd.id) do %>
 			<%= attachment_image_tag cd, :cd_image, :fill, 300, 300, fallback: "/images/no_image.jpg" %>
 			<% end %>
-			<h4><%= cd.cd_title %></h4>
-			<h5><%= link_to cd.artist.artist_name %></h5>
+			<h4><%= link_to cd.cd_title, cd_path(cd) %></h4>
+			<h5><%= link_to cd.artist.artist_name, artist_path(cd.artist) %></h5>
 		</div>
 	<% end %>
 <% end %>

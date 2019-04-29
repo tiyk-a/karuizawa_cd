@@ -28,13 +28,15 @@
               <li><%= link_to "About",'/about' %> </li>
               <li><%= link_to "CD", cds_path %> </li>
               <li><%= render 'layouts/search', {search: @search} %></li>
-              <li><%= link_to check_path do %><i class="fas fa-cart-arrow-down" style="font-size:25px; padding: 0;"></i><% end %>
-                <% if current_cart.cart_items.present? %>
-                <% itemCount = 0 %>
-                <% current_cart.cart_items.each do |i| %>
-                <% itemCount += i.quantity %>
+              <li><%= link_to check_path do %>
+                <i class="fas fa-cart-arrow-down" style="font-size:25px; padding: 0;"></i>
                 <% end %>
-                <%= itemCount %> Items you have!
+                <% if current_cart.cart_items.present? %>
+                  <% itemCount = 0 %>
+                  <% current_cart.cart_items.each do |i| %>
+                    <% itemCount += i.quantity %>
+                  <% end %>
+                  <%= itemCount %> Items you have!
                 <% end %></li>
                 <% if user_signed_in? %>
                 <li><%= link_to user_path(current_user) do %>Hello, <%= current_user.user_name %><% end %></li>

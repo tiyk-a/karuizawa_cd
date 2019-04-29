@@ -10,15 +10,12 @@
          <li> ユーザー名: <%= @user.user_name %></li>
          <li> Email:  <%= @user.email %></li>
          <% end %>
+         <P> ※登録情報は配送時に使用します。</P>
      </div>
     <div class="col-lg-4">
-    	<P> ※登録情報は配送時に使用します。</P>
-	    <ul>
- 	      <li><button type="button" class="btn btn-default"><%= link_to "注文履歴", root_path %></button></li>
-	      <li><button type="button" class="btn btn-default"><%= link_to "登録情報編集", edit_user_path(current_user) %></button></li>
-	      <li><button type="button" class="btn btn-default"><%= link_to "お問い合わせ", new_inquiry_path %></button></li>
-	     <li><%= link_to "logout",  destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>
-	    </ul>
+ 	      <button type="button" class="btn btn-default"><%= link_to "注文履歴", root_path %></button><br>
+	      <button type="button" class="btn btn-default"><%= link_to "登録情報編集", edit_user_path(current_user) %></button><br>
+	      <button type="button" class="btn btn-default"><%= link_to "お問い合わせ", new_inquiry_path %></button><br>
     </div>
   </div>
 </div>
@@ -31,7 +28,7 @@
     <div class="eachFavarites">
       <div>
       <%= link_to cd_path(f.cd.id) do %>
-        <%= attachment_image_tag f.cd, :cd_image, :fill, 100, 100, fallback: "/images/no_image.jpg" %>
+        <%= attachment_image_tag f.cd, :cd_image, :fill, 200, 200, fallback: "/images/no_image.jpg" %>
       <% end %>
       </div>
       <div>
@@ -42,3 +39,9 @@
 </div>
 </div>
 </div>
+
+<style>
+  .eachFavarites {
+    display: inline-block;
+  }
+</style>

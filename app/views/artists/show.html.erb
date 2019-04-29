@@ -5,7 +5,7 @@
 			<%= attachment_image_tag(@artist, :artist_image, :fill, 300, 300) %>
 		</div>
 		<div class="col-lg-8">
-			<h2><%= @artist.artist_name %></h2>
+			<h2 class="artistDivision"><%= @artist.artist_name %></h2>
 			<p><%= @artist.artist_profile %></p>
 			<% if user_signed_in? && current_user.admin?  %>
 				<%= link_to "歌手情報編集", edit_artist_path(@artist.id), class: "btn btn-default" %>
@@ -16,7 +16,7 @@
 </div>
 <div class="container">
 	<div clas="row">
-		<h3><%= @artist.artist_name %>のCD</h3>
+		<h3 class="artistDivision"><%= @artist.artist_name %>のCD</h3>
 			<% if @artist.cds.present? %>
 			<% @artist.cds.each do |cd| %>
 				<div class="col-lg-4">
@@ -44,3 +44,10 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.artistDivision {
+		background-color: black;
+		padding: 5px 10px;
+		color: white;
+	}
