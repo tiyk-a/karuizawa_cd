@@ -31,7 +31,7 @@
     <div class="eachFavarites">
       <div>
       <%= link_to cd_path(f.cd.id) do %>
-        <%= attachment_image_tag f.cd, :cd_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+        <%= attachment_image_tag f.cd, :cd_image, :fill, 100, 100, fallback: "/images/no_image.jpg" %>
       <% end %>
       </div>
       <div>
