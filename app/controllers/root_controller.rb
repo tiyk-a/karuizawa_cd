@@ -1,7 +1,8 @@
 class RootController < ApplicationController
+	
 	def top
-		@categories = Category.all 
-		@pickups = Pickup.all
+		@categories = Category.all.reverse_order
+		@pickups = Pickup.all.reverse_order
 	end
 
 	def about

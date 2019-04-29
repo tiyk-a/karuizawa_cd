@@ -1,4 +1,5 @@
 class CdsController < ApplicationController
+  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   def index
     @cds = Cd.all.reverse_order
     @cart_item = CartItem.new
@@ -9,7 +10,6 @@ class CdsController < ApplicationController
     @artists = Artist.all.reverse_order
     @labels = Label.all.reverse_order
     @categories = Category.all.reverse_order
-    @disc_number = @cd.disc_numbers.build #ryo
 
   end
 
@@ -41,6 +41,10 @@ class CdsController < ApplicationController
     @artists = Artist.all.reverse_order
     @labels = Label.all.reverse_order
     @categories = Category.all.reverse_order
+    @cd.disc_numbers.each do |d|
+      @songs = d.songs.all
+    end
+
   end
 
   def update
@@ -50,6 +54,9 @@ class CdsController < ApplicationController
       redirect_to cd_path(@cd)
     else
       flash[:notice] = "Error!"
+      @artists = Artist.all.reverse_order
+    @labels = Label.all.reverse_order
+    @categories = Category.all.reverse_order
       render :edit
     end
   end
@@ -74,7 +81,7 @@ class CdsController < ApplicationController
   private
   def cd_params
     params.require(:cd).permit(:cd_title, :cd_image, :stock, :cd_profile, :price, :artist_id, :label_id, :category_id,
-      disc_number_attributes: [:id, :cd_id, :disc_number, :_destroy, songs_attributes: [:id, :song_order, :song_name, :_destroy]])
+      disc_numbers_attributes: [:id, :disc_number, :_destroy, songs_attributes: [:id, :song_order, :song_name, :_destroy]])
   end
 
   def cart_item_params

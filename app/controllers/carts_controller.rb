@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :current_cart, only: [:cart]
+  before_action :current_cart
 
   def check
     @cart = current_cart

@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :check_admin, only: [:create]
+
   def index
     @categories = Category.all.reverse_order
   end

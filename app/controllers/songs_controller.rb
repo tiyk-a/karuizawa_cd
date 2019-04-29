@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+	before_action :check_admin, only: [:new, :create, :edit, :update]
+	
 	def new
 		@song = Song.new
 	end
