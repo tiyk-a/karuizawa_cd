@@ -14,14 +14,44 @@
         <%= render 'disc_number_fields', f: disc_number %>
         <% end %>
         <div id="links">
-          <%= link_to_add_association 'ディスク枚数を増やす',f, :disc_numbers %>
+          <%= link_to_add_association 'ディスク枚数を増やす',f, :disc_numbers, class: "btn btn-default btn-sm" %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-lg-5">
           <%= f.label :cd_image, "CD画像" %>
-          <%= f.attachment_field :cd_image, class: "form-control" %>
+          <%= f.attachment_field :cd_image, class: "form-control", id: "newCd" %>
+          <img id="cd_img" style="max-width: 200px" />
+            <script type="text/javascript">
+              $(function(){
+                $('#newCd').change(function(e){
+                //ファイルオブジェクトを取得する
+                  var file = e.target.files[0];
+                  var reader = new FileReader();
+ 
+                //画像でない場合は処理終了
+                  if(file.type.indexOf("image") < 0){
+                     alert("Select an image");
+                      return false;
+                    }
+ 
+                  //アップロードした画像を設定する
+                  reader.onload = (function(file){
+                    return function(e){
+                    $("#cd_img").attr("src", e.target.result);
+                    $("#cd_img").attr("title", file.name);
+                        };
+                       })(file);
+                    reader.readAsDataURL(file);
+ 
+                    });
+                  });
+            </script>
+            <% if cd.cd_image.present? %>
+            <p>現在使用中の画像</p>
+              <%= attachment_image_tag(cd, :cd_image, :fill, 200, 200) %>
+            <% end %>
         </div>
       </div>
 

@@ -7,6 +7,8 @@ class CdsController < ApplicationController
 
   def new
     @cd = Cd.new
+    @disc_number = @cd.disc_numbers.build
+    @song = @disc_number.songs.build
     @artists = Artist.all.reverse_order
     @labels = Label.all.reverse_order
     @categories = Category.all.reverse_order
@@ -66,6 +68,8 @@ class CdsController < ApplicationController
     @comment = Comment.new
     @comment_reply = CommentReply.new
     @cart_item = CartItem.new
+    @fstDisc = @cd.disc_numbers.find_by(disc_number: 1)
+    @restDiscs = @cd.disc_numbers.where.not(disc_number: 1)
   end
 
   def destroy
@@ -81,7 +85,8 @@ class CdsController < ApplicationController
   private
   def cd_params
     params.require(:cd).permit(:cd_title, :cd_image, :stock, :cd_profile, :price, :artist_id, :label_id, :category_id,
-      disc_numbers_attributes: [:id, :disc_number, :_destroy, songs_attributes: [:id, :song_order, :song_name, :_destroy]])
+      disc_numbers_attributes: [:id, :disc_number, :_destroy,
+      songs_attributes: [:id, :song_order, :song_name, :_destroy]])
   end
 
   def cart_item_params

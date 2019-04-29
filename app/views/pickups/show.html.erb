@@ -97,7 +97,7 @@
 				<%= @pickup.pickup_title%>
 			</div>
 			<div id="pickupBody">
-				<%= @pickup.pickup_body %>
+				<%= simple_format(@pickup.pickup_body) %>
 			</div>
 		</div>
 		<%= link_to 'Edit Pickup', edit_pickup_path(@pickup), class: "btn btn-default" %>

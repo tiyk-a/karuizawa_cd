@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:create, :edit, :update]
   get '/stocks' => 'orders#stocks',as: 'stocks'
 # chiharu
-  
+
   #kazumi
   devise_for :users
   devise_scope :user do

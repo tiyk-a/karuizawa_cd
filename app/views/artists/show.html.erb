@@ -26,7 +26,8 @@
 						<% end %>
 					</div>
 					<div>
-						<p><%= link_to cd.cd_title, cd_path(cd.id) %></p>
+						<h4><%= link_to cd.cd_title, cd_path(cd.id) %></h4>
+						<h5><%= cd.artist.artist_name %></h5>
 						<p>価格: <%= cd.price %></p>
 					</div>
 				</div>
