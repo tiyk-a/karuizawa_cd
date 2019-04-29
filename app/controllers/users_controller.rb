@@ -20,21 +20,21 @@ class UsersController < ApplicationController
         render 'users/registrations/new'
       end
    end
-   
+
    def edit
        @user =current_user
    end
-   
+
    def update
        @user=User.find(params[:id])
-        if @user.update(cd_params)
+        if @user.update(user_params)
           flash[:notice] = "更新しました!"
           redirect_to root_path
         else
           flash[:notice] = "Error!"
           render :edit
         end
-  end
+   end
  
  def destroy
      @user= User.find(params[:id])
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
    private
   def user_params
-    params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password, :admin)
+    params.require(:user).permit(:email, :user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password, :admin)
   end
 
 end

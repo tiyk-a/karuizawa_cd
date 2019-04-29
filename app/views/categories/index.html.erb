@@ -7,7 +7,7 @@
 				<% if category.id % 3 == 0 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 300, 300, format: "jpg") %>
 					<% end %>
 					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
@@ -19,7 +19,7 @@
 				<% if category.id % 3 == 2 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 300, 300, format: "jpg") %>
 					<% end %>
 					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
@@ -31,7 +31,7 @@
 				<% if category.id % 3 == 1 %>
 				<div class="eachCategory">
 					<%= link_to category_path(category.id) do %>
-					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 210, 210, format: "jpg", fallback: "/images/no_image.jpg", size: '100X100') %>
+					<%= attachment_image_tag(category.cds.last, :cd_image, :fill, 300, 300, format: "jpg") %>
 					<% end %>
 					<h1><%= link_to category.category_name, category_path(category.id) %></h1>
 				</div>
@@ -56,6 +56,7 @@
 		height: 300px;
 		display: inline-block;
 		position: relative;
+		margin-bottom: 40px;
 	}
 	.eachCategory h1 a {
 		position: absolute;
@@ -64,7 +65,7 @@
 		background-color: black;
 		opacity: 0.8;
 		padding: 10px 5px;
-		width: 210px;
+		width: 300px;
 		text-decoration: none;
 	}
 	.eachCategory h1 a:hover {

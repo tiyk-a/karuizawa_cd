@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
 	def create
 		@order = Order.new(order_params)
 		@order.planned_delivery_date = Date.today + 2
+		@order.delivery_status = 0
 		if @order.save
 			current_cart.cart_items.each do |item|
 				order_item = @order.order_items.build
@@ -69,7 +70,7 @@ class OrdersController < ApplicationController
 	def update
 		@order = Order.find(params[:id])
 		@order.update(order_params)
-		redirect_to status_path(@order)
+		redirect_to orders_path
 	end
 
 	def stocks

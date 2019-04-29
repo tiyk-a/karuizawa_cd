@@ -46,6 +46,9 @@ def user_params
     params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password )
 end
 
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 # def user_params
 #     params.require(:user).permit(:user_name,:first_name,:last_name,:first_name_kana,:last_name_kana,:post_code,:phone_number,:password )
 #   end
