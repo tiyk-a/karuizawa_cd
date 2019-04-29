@@ -68,6 +68,8 @@ class CdsController < ApplicationController
     @comment = Comment.new
     @comment_reply = CommentReply.new
     @cart_item = CartItem.new
+    @fstDisc = @cd.disc_numbers.find_by(disc_number: 1)
+    @restDiscs = @cd.disc_numbers.where.not(disc_number: 1)
   end
 
   def destroy

@@ -8,8 +8,8 @@
 				<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></p>
 				<p>価格: <%= cd.price %></p>
 			<%= f.hidden_field :cd_id, value: cd.id %>
-			<%= f.hidden_field :pickup_title, value: 'Put Pickup Title' %>
-			<%= f.hidden_field :pickup_body, value: 'Put Pickup Body' %>
+			<%= f.hidden_field :pickup_title, value: 'ピックアップのヘッドラインを記入してください' %>
+			<%= f.hidden_field :pickup_body, value: 'ピックアップの本文を記入してください' %>
 			<%= f.submit "ピックアップを作成する", class: "form-control" %>
 			<% end %>
 		</div>

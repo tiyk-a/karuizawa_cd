@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= f.label :disc_number %>
     <%= f.number_field :disc_number %><br>
-    <%= link_to_remove_association "このディスクを消す", f %>
+    <%= link_to_remove_association "このディスクを消す", f, class: "btn btn-default btn-sm" %>
   </div>
 
   <div class="songs">
@@ -10,7 +10,7 @@
       <%= render 'song_fields', f: song %>
     <%end%>
     <div class="links">
-      <%= link_to_add_association "曲追加", f, :songs %>
+      <%= link_to_add_association "曲追加", f, :songs, class: "btn btn-default btn-sm" %>
     </div>
   </div>
 </div>

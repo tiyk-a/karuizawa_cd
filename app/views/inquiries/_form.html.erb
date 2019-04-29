@@ -1,0 +1,18 @@
+<%= form_for (inquiry) do |f| %>
+           <%= render 'layouts/error_messages', model: f.object %>
+           <div>
+              <%= f.label :inquiry_Email, "返信先メールアドレス" %>
+              <%= f. text_field :inquiry_email, class: "form-control" %>
+           </div>
+	       <div>
+            <%= f.label :inquiry_category, "お問い合わせカテゴリー" %>
+            <%= f.select :inquiry_category, Inquiry.inquiry_categories.keys.to_a, {}, class: "form-control" %>
+  	       </div>
+  	       <div>
+	          <%= f.label :inquiry_body, "お問い合わせ内容" %>
+  	          <%= f.text_area :inquiry_body, rows: "5", class: "form-control" %>
+  	       </div>
+           <div>
+  	       <%= f.submit  class: "btn btn-default" %>
+         </div>
+        <% end %>

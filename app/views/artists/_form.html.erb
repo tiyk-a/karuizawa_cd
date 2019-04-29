@@ -1,13 +1,43 @@
 <div class="container">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-lg-10">
 </div>
-<div class="col-lg-4">
+<div class="col-lg-10">
 <%= form_with model: artist do |f| %>
 <%= render 'layouts/error_messages', model: f.object %>
   <div>
   <%= f.label :artist_image, "歌手画像" %>
-  <%= f.attachment_field :artist_image, class: "form-control" %>
+  <%= f.attachment_field :artist_image, class: "form-control", id: "newArtist" %>
+          <img id="artist_img" style="max-width: 200px" />
+            <script type="text/javascript">
+              $(function(){
+                $('#newArtist').change(function(e){
+                //ファイルオブジェクトを取得する
+                  var file = e.target.files[0];
+                  var reader = new FileReader();
+ 
+                //画像でない場合は処理終了
+                  if(file.type.indexOf("image") < 0){
+                     alert("Select an image");
+                      return false;
+                    }
+ 
+                  //アップロードした画像を設定する
+                  reader.onload = (function(file){
+                    return function(e){
+                    $("#artist_img").attr("src", e.target.result);
+                    $("#artist_img").attr("title", file.name);
+                        };
+                       })(file);
+                    reader.readAsDataURL(file);
+ 
+                    });
+                  });
+            </script>
+            <% if artist.artist_image.present? %>
+            <p>現在使用中の画像</p>
+              <%= attachment_image_tag(artist, :artist_image, :fill, 200, 200) %>
+            <% end %>
   </div>
 	<div>
 	<%= f.label :artist_name, "歌手名" %>

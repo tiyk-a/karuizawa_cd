@@ -18,7 +18,7 @@
     <th>Email</th> 
     <th>登録日時</th> 
     <th>注文回数</th>
-    <th>Admin</th> 
+    <th>Admin?</th> 
     <th>削除</th> 
 </thead>  
 
@@ -33,11 +33,11 @@
      <td><%= user.email %></td>
      <td><%= user.created_at %></td>
      <td><%= user.orders.count %></td>
-     <td><% if user.admin = true %>
-        <%= link_to "Admin取消", destroy_admin_path(user), method: :delete, class: "btn btn-secondary btn-sm" %>
+     <% if user.admin == true %>
+        <td><%= link_to destroy_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
      <% else %>
-        <%= link_to "Adminに設定", add_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
-    <% end %>
+        <td><%= link_to add_admin_path(user), method: :post, class: "btn btn-default btn-sm" %></td>
+     <% end %>
      <td><%= link_to 'x', user, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-default btn-sm" %></td>
   </tr>
   <% end %>

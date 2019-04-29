@@ -28,15 +28,41 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">新着音楽</div>
+<div class="container">
+	<div clas="row">
+		<% @cds.each do |cd| %>
+		<%= link_to cd_path(cd) do %>
+		<div class="col-lg-3 newCd">
+			<%= attachment_image_tag(cd, :cd_image, :fill, 200, 200) %><br>
+			<strong><%= cd.cd_title %></strong>
+			<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %><br>
+				価格: ¥ <%= cd.price %><br>
+			<% if user_signed_in? && current_user.admin?  %>
+				在庫数: <%= cd.stock %></p>
+			<% end %>
+		</div>
+		<% end %>
+		<% end %>
+	</div>
+</div>
 					<div class="panel-body">
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">新着コメント</div>
 					<div class="panel-body">
+						<% @comments.each do |c| %>
+						<% end %>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<style>
+	.newCd {
+		display: inline-block;
+	}
+</style>
