@@ -1,4 +1,5 @@
 class RootController < ApplicationController
+	
 	def top
 		@categories = Category.first(15)
 		@pickups = Pickup.first(5)

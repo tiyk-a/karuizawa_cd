@@ -12,8 +12,9 @@ class Cd < ApplicationRecord
 	has_one :pickup, inverse_of: :cd
 
 	#ryo
-	has_many :disc_numbers, dependent: :destroy, inverse_of: :cd
+	has_many :disc_numbers, inverse_of: :cd
 	accepts_nested_attributes_for :disc_numbers, reject_if: :all_blank, allow_destroy: true
+	has_many :songs, through: :disc_numbers, inverse_of: :disc_numbers
 
 	has_many :cart_items, dependent: :destroy
 	has_many :order_items

@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-8">
 			<%= render 'header' %>
-			<h1>Checkouts#payment</h1>
+			<h1>お支払い</h1>
 
 				<%= form_tag("/omise", method: :post) do %>
 				<input type="text" name="number" maxlength="16" placeholder="カード番号"><br>
@@ -11,7 +11,7 @@
 				<input type="text" name="exp_month" maxlength="2" placeholder="月">
 				<input type="text" name="exp_year" maxlength="4" placeholder="西暦（４桁）"><br>
 				<input type="text" name="city" placeholder="City">
-				<input type="text" name="postal_code" maxlength="7" placeholder="Postalcode">
+				<input type="text" name="postal_code" maxlength="7" placeholder="郵便番号">
 				<% subTotal = 0 %>
 				<% totalPrice = 0 %>
 				<% if @order.order_items.present? %>
@@ -21,11 +21,11 @@
 					<%= hidden_field_tag :amount, totalPrice %>
 					<% end %>
 				<% else %>
-					<% totalPrice = @cart.order.order_items.price * @cart.order.order_items.quantity %>
+					<% totalPrice = @order.order_items.price * @order.order_items.quantity %>
 					<%= hidden_field_tag :amount, totalPrice %>
 				<% end %>
 				<div class="priceBox">
-					<h3>Total price is <%= totalPrice %> yen</h3>
+					<h3>合計お支払い金額 <%= totalPrice %> 円</h3>
 				</div>
 				<input type="submit">
 				<% end %>
@@ -39,8 +39,8 @@
 
 <script>
 	$(document).ready(function(){
-		$('#fst').html('<i class="fas fa-circle"></i>')
-		$('#snd').html('<i class="fas fa-circle"></i>')
+		$('#fst').html('<i class="fas fa-circle fa-2x"></i>')
+		$('#snd').html('<i class="fas fa-circle fa-2x"></i>')
 	});
 </script>
 <style>

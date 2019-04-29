@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  
+  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
   def new
     @artist = Artist.new
   end

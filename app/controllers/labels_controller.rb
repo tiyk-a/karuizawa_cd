@@ -1,4 +1,6 @@
 class LabelsController < ApplicationController
+  before_action :check_admin, only: [:create, :edit, :update, :destroy, :index]
+  
   def index
     @label = Label.new
     @labels = Label.all.reverse_order

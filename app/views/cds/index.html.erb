@@ -7,15 +7,13 @@
 				<%= link_to cd_path(cd.id) do %>
 				<%= attachment_image_tag(cd, :cd_image, :fill, 300, 300) %>
 				<% end %>
-				<p><%= link_to cd.cd_title, cd_path(cd.id) %></p>
-				<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></p>
+				<h4><%= link_to cd.cd_title, cd_path(cd.id) %></h4>
+				<h5><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></h5>
 				<p>価格: ¥ <%= cd.price %></p>
 
 				<div class="inline-block">
 					<% if current_cart.cart_items.find_by(cd_id: cd.id).present? %>
 							<div class="itemInCartNotif">
-								<p>This product is alredy in your cart!</p>
-							</div>
 							<% itemInCart = current_cart.cart_items.find_by(cd_id: cd.id) %>
 							<%= form_for(itemInCart) do |f| %>
 							<%= render 'layouts/error_messages', model: f.object %>
@@ -24,10 +22,12 @@
 								</div>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
-										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+										<i class="fas fa-cart-arrow-down" style="font-size:20px;"></i>
 									<% end %>
 								</div>
 							<% end %>
+							<p class="notifText">購入する数量を変更しますか？</p>
+							</div>
 					<% else %>
 							<%= form_for(@cart_item) do |f| %>
 							<%= render 'layouts/error_messages', model: f.object %>
@@ -38,7 +38,7 @@
 								<%= f.hidden_field :cart_id, value: current_cart.id %>
 								<div class="inline-block">
 									<%= button_tag type: 'submit', method: :post, url: cart_items_path, class: "btn" do %>
-										<i class="fas fa-cart-arrow-down" style="font-size:30px;"></i>
+										<i class="fas fa-cart-arrow-down" style="font-size:20px;"></i>
 									<% end %>
 								</div>
 							<% end %>
@@ -48,15 +48,13 @@
 					<div class="inline-block">
 						<% if cd.favorited_by?(current_user) %>
 					<div>
-						<%= link_to cd_favorite_path(cd), method: :delete do %><button class="btn btn-default btn-sm">
-						<i class="far fa-heart" aria-hidden="true" style="color: red;"></i></button><%= cd.favorites.count %>
-						<% end %>
+						<%= link_to cd_favorite_path(cd), method: :delete do %><button class="btn btn-secondary btn-sm">
+						<i class="far fa-heart" aria-hidden="true" style="color: red;"></i></button><% end %><%= cd.favorites.count %>
 					</div>
 						<% else %>
 					<div>
-						<%= link_to cd_favorite_path(cd), method: :post do %><button class="btn btn-default btn-sm"><%= cd.favorites.count %>
-						<i class="far fa-heart" aria-hidden="true"></i></button>
-						<% end %>
+						<%= link_to cd_favorite_path(cd), method: :post do %><button class="btn btn-secondary btn-sm">
+						<i class="far fa-heart" aria-hidden="true"></i></button><% end %><%= cd.favorites.count %>
 					</div>
 						<% end %>
 					</div>
@@ -109,7 +107,12 @@
 		border-radius: 3px;
 	}
 	.itemInCartNotif {
-		background-color: pink;
+		background-color: lightgray;
 		padding: 5px 10px 0 10px;
+		border-radius: 3px;
+		display: inline-block;
+	}
+	.notifText {
+		font-size: 10px;
 	}
 </style>

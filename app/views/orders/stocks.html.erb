@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+		</div>
+		<div class="col-lg-4">
+			<h3>販売中CD</h3>
+				<table id="stockTable">
+					<th>CDタイトル</th>
+					<th>ストック</th>
+					<% @cds.each do |cd| %>
+					<tr>
+						<td><%= cd.cd_title %></td>
+						<td><%= cd.stock %></td>
+					</tr>
+					<% end %>
+				</table>
+			<h3>欠品中CD</h3>
+				<% if @soldOutCds.present? %>
+					<table id="soldOutTable">
+						<th>CDタイトル</th>
+						<th>ストック</th>
+							<% @soldOutCds.each do |cd| %>
+							<tr>
+								<td><%= cd.cd_title %></td>
+								<td><%= cd.stock %></td>
+							</tr>
+							<% end %>
+					</table>
+				<% else %>
+					<table id="soldOutTable">
+						<th>CDタイトル</th>
+						<th>ストック</th>
+					</table>
+						<h5>欠品中の商品はありません</h5>
+				<% end %>
+			</div>
+			<div class="col-lg-4">
+			</div>
+		</div>
+	</div>
+<style>
+	#stockTable th, #stockTable td, #soldOutTable th, #soldOutTable td {
+		padding: 0 10px;
+	}
+</style>

@@ -1,10 +1,12 @@
 class DiscNumbersController < ApplicationController
 	before_action :set_disc_number, only: [:new, :edit, :create, :update, :destroy]
+	before_action :check_admin
 	def new
 		@disc_number = Disc_number.new
 	end
 
 	def edit
+	
 	end
 
 	def create
