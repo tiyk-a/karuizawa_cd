@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_27_071635) do
+ActiveRecord::Schema.define(version: 2019_04_27_091400) do
 
   create_table "artists", force: :cascade do |t|
     t.string "artist_name"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 2019_04_27_071635) do
     t.integer "user_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.string "session"
+    t.index ["deleted_at"], name: "index_carts_on_deleted_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -76,7 +79,6 @@ ActiveRecord::Schema.define(version: 2019_04_27_071635) do
     t.integer "disc_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cd_id"], name: "index_disc_numbers_on_cd_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -147,7 +149,6 @@ ActiveRecord::Schema.define(version: 2019_04_27_071635) do
     t.integer "song_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["disc_number_id"], name: "index_songs_on_disc_number_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -157,7 +158,6 @@ ActiveRecord::Schema.define(version: 2019_04_27_071635) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "address"
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_kana"
