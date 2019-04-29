@@ -25,34 +25,31 @@
 			</div>
 			<div class="col-md-9">
 				<img src="assets/Sensualidad.jpg" class="img-responsive img-rounded">
-
-				<div class="panel panel-default">
-					<div class="panel-heading">新着音楽</div>
-<div class="container">
-	<div clas="row">
-		<% @cds.each do |cd| %>
-		<%= link_to cd_path(cd) do %>
-		<div class="col-lg-3 newCd">
-			<%= attachment_image_tag(cd, :cd_image, :fill, 200, 200) %><br>
-			<strong><%= cd.cd_title %></strong>
-			<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %><br>
-				価格: ¥ <%= cd.price %><br>
-			<% if user_signed_in? && current_user.admin?  %>
-				在庫数: <%= cd.stock %></p>
-			<% end %>
-		</div>
-		<% end %>
-		<% end %>
-	</div>
-</div>
-					<div class="panel-body">
+				<div class="top-menu">
+					<div class="panel panel-default">
+						<div class="panel-heading">新着音楽</div>
+						<div class="panel-body">
+							<% @cds.each do |cd| %>
+							<div class="cd">
+								<%= link_to attachment_image_tag(cd, :cd_image, :fill, 250, 250, class: "img-responsive img-rounded"), cd_path(cd.id) %>
+								<p><%= link_to cd.cd_title, cd_path(cd.id) %></p>
+								<p><%= link_to cd.artist.artist_name, artist_path(cd.artist.id) %></p>
+								<p>価格: <%= cd.price %></p>
+							</div>
+							<% end %>
+						</div>
 					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">新着コメント</div>
-					<div class="panel-body">
-						<% @comments.each do |c| %>
-						<% end %>
+					<div class="panel panel-default">
+						<div class="panel-heading">新着コメント</div>
+						<div class="panel-body">
+							<% @comments.each do |comment| %>
+							<div class="cd">
+								<%= link_to attachment_image_tag(comment.cd, :cd_image, :fill, 250, 250, class: "img-responsive img-rounded"), cd_path(comment.cd.id) %>
+								<p><%= comment.user.user_name %></p>
+								<p><%= comment.comment_body %></p>
+							</div>
+							<% end %>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -60,9 +57,16 @@
 	</div>
 </div>
 
-
 <style>
-	.newCd {
-		display: inline-block;
-	}
+.top-menu{
+	margin-top: 20px;
+}
+.cd{
+	float: left;
+	margin: 0px 5px 0px 5px;
+}
+p{
+	width: 250px;
+	text-align: center;
+}
 </style>

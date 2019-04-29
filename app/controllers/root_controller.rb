@@ -1,9 +1,10 @@
 class RootController < ApplicationController
 	
 	def top
-		@categories = Category.all.reverse_order
-		@pickups = Pickup.all.reverse_order
-		@cds = Cd.limit(3).reverse_order
+		@categories = Category.last(15)
+		@pickups = Pickup.last(5)
+		@cds = Cd.last(3)
+		@comments = Comment.last(3)
 	end
 
 	def about
