@@ -38,8 +38,8 @@ class OrdersController < ApplicationController
 	end
 
 	def omise
-        Omise.public_api_key = "pkey_test_5fqmqgvjfzfjb0xbz8d"
-        Omise.secret_api_key = "skey_test_5fqmqhqrmjv0ajygljb"
+        Omise.public_api_key = "pkey_test_5fqn0nsjkbb4n5smxkm"
+        Omise.secret_api_key = "skey_test_5fqn0odepg9t0ug6lqp"
         token = Omise::Token.create(
         :card => {:name => params[:name],
         :number => params[:number],
