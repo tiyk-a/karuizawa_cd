@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   post '/omise' => "orders#omise"
   post '/add_admin/:id', to: 'users#add_admin', as: :add_admin
-  delete '/destroy_admin/:id', to: 'users#destroy_admin', as: :destroy_admin
+  post '/destroy_admin/:id', to: 'users#destroy_admin', as: :destroy_admin
 
 
   #ryo

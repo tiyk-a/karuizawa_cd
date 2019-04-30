@@ -24,7 +24,7 @@
    <div class="row">
      <div class="col-lg-12">
   <h2> お気に入り一覧</h2>
-   	<% @user.favorites.each do |f| %>
+   	<% @user.favorites.reverse_order.each do |f| %>
     <div class="eachFavarites">
       <div>
       <%= link_to cd_path(f.cd.id) do %>
