@@ -21,11 +21,7 @@
 
 
 
-if(typeof jQuery != "undefined"){ //jQueryの読み込み確認
-    $(function(){
-        alert('jQuery is ready.')
-    });
-}
+
 
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
