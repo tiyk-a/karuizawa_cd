@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-lg-12">
           <nav class="nav navbar-nav navbar-left">
-            <%= link_to root_path do %><%= image_tag '/images/cd_logo.png' %><% end %>
+            <%= link_to root_path do %><%= image_tag '/images/cd_logo.png', class: "logo-image" %><% end %>
           </nav>
           <nav>
             <ul class="nav navbar-nav navbar-right" style="color: white;">
@@ -43,6 +43,7 @@
                 <li><%= link_to "ログアウト", logout_path %></li>
                 <% else %>
                 <li><%= link_to "ログイン", new_user_session_path %></li>
+                <li><%= link_to "会員登録", '/users/sign_up' %></li>
                 <% end %>
               </ul>
             </nav>
@@ -84,7 +85,7 @@
             <ul class="list-inline">
               <li class="list-inline-item"><%= link_to "Home",'/' %></li>
               <li class="list-inline-item"><%= link_to "About",'/about' %></li>
-              <li class="list-inline-item">Copyright 2019 πaAll Rights Reserved.</li>
+              <li class="list-inline-item">Copyright 2019 All Rights Reserved.</li>
               <li class="list-inline-item"><%= link_to "お問い合わせ",'/inquiries/new' %></li>
             </ul>
           </div>
@@ -96,6 +97,9 @@
   </html>
 
   <style>
+  .logo-image{
+    padding-top: 5px;
+  }
   .list-inline{
     text-align: center;
   }

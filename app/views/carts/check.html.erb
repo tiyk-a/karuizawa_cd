@@ -1,11 +1,11 @@
 	<div class="container">
 		<div clas="row">
 			<div class="notif-top">
-    			<% if flash[:notice] %>
-       			 <div class="flash bg-warning">
-        			<%= flash[:notice] %>
-       			 </div>
-    			<% end %>
+				<% if flash[:notice] %>
+				<div class="flash bg-warning">
+					<%= flash[:notice] %>
+				</div>
+				<% end %>
 			</div>
 
 			<% if @cart.cart_items.present? %>
@@ -46,6 +46,7 @@
 		<%= link_to "Checkout", checkout_path, class: "btn btn-primary"  %>
 		</div>
 		<% end %>
+
 	</div>
 </div>
 
