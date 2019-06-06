@@ -5,6 +5,11 @@ class CategoriesController < ApplicationController
     @categories = Category.all.reverse_order
   end
 
+  def new
+    @category = Category.new
+    @categories = Category.all.reverse_order
+  end
+
   def create
     @category = Category.new(category_params)
     @category.save

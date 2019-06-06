@@ -6,7 +6,7 @@ Rails.application.routes.draw do
  
   resources :artists, only: [:new, :create, :edit, :update, :show, :destroy]
   resources :labels, only: [:create, :update, :index, :show, :destroy]
-  resources :categories, only: [:create, :index, :show]
+  resources :categories, only: [:create, :index, :show, :new]
   resources :cds do
 
 

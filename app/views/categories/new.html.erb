@@ -1,0 +1,19 @@
+<div class="container">
+<div class="row">
+		<div class="col-lg-12 text-center">
+			<h1>新規カテゴリー</h1>
+			<%= form_for(@category) do |f| %>
+				<%= f.label :category_name %>
+				<%= f.text_field :category_name %>
+				<%= f.submit '登録' %>
+			<% end %>
+			<h1>登録済みカテゴリー一覧</h1>
+			<ul>
+				<% @categories.each do |c| %>
+					<li><%= c.category_name %>
+				<% end %>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
