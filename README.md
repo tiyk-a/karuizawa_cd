@@ -1,24 +1,26 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+# CD屋さんのオンライン・ショッピングサイト
+スクールのチームプロジェクトして１ヶ月間で企画詰めから実装までを行いました。
+(May, 2019)
 
 * Ruby version
+2.5.3
 
-* System dependencies
+* Ruby on Rails version
+5.2.3
 
-* Configuration
 
-* Database creation
+## Precondition
+ 軽井沢にある個人経営のCDショップで、お客さんの高齢化と減少に困っているため、オンラインショップを立ち上げるという設定。
+ CDのジャケットデザインや歌詞カードなど、モノを買うことのウキウキ感、楽しさを伝えるためCDにこだわり。
 
-* Database initialization
+## My Role in Team
+チーム全体のディレクション
 
-* How to run the test suite
+#### 実装担部分
+* CD関連機能＆view
+* アーティスト関連機能＆view
+* カート・購入関連機能＆view
+（トップページ、ユーザー登録・ログイン関連、お問い合わせページ以外） 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Highlights
+* 非ログインゲストも商品を購入できます。
