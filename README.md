@@ -1,5 +1,8 @@
 # CD屋さんのオンライン・ショッピングサイト
 スクールのチームプロジェクトして１ヶ月間で企画詰めから実装までを行いました。
+
+Please check it out:point_right: https://karuizawa-cd.herokuapp.com
+
 (May, 2019)
 
 * Ruby version
