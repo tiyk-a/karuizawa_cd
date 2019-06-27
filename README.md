@@ -11,6 +11,9 @@ Please check it out:point_right: https://karuizawa-cd.herokuapp.com
 * Ruby on Rails version
 5.2.3
 
+* Storage
+AWS S3
+
 
 ## Precondition
  軽井沢にある個人経営のCDショップで、お客さんの高齢化と減少に困っているため、オンラインショップを立ち上げるという設定。
